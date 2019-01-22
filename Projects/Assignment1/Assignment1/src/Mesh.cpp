@@ -15,7 +15,7 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &this->indexBuffer);
 }
 
-void Mesh::RenderMesh()
+void Mesh::Draw()
 {
 	glBindVertexArray(this->vertexArray);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuffer);

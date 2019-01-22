@@ -21,7 +21,7 @@ Plane::~Plane()
 void Plane::Draw()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	this->mesh->RenderMesh();
+	this->mesh->Draw();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 

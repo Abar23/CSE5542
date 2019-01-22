@@ -19,7 +19,7 @@ public:
 	
 	~Mesh();
 	
-	void RenderMesh();
+	void Draw();
 
 private:
 	GLuint vertexArray, vertexBuffer, indexBuffer;
