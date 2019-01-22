@@ -1,0 +1,2 @@
+﻿  mian.cpp
+d:\git\cse5542\projects\assignment1\assignment1\include\gl\glew.h(85): fatal error C1189: #error:  gl.h included before glew.h
