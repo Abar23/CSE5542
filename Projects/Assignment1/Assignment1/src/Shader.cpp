@@ -68,38 +68,40 @@ static char* ReadShaderSource(const char *shaderPath)
 
 Shader::Shader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
+	GLuint vertexShaderID;
+	GLuint fragmentShaderID;
+
 	//Create and compile vertex shader
 	const char *vertexShaderCode = ReadShaderSource(vertexShaderPath);
-	this->vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(this->vertexShaderID, 1, &vertexShaderCode, NULL);
-	glCompileShader(this->vertexShaderID);
-	CheckCompileErrors(this->vertexShaderID, "VERTEX");
+	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShaderID, 1, &vertexShaderCode, NULL);
+	glCompileShader(vertexShaderID);
+	CheckCompileErrors(vertexShaderID, "VERTEX");
 
 	//Create and compile fragment shader
 	const char *fragmentShaderCode = ReadShaderSource(fragmentShaderPath);
-	this->fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(this->fragmentShaderID, 1, &fragmentShaderCode, NULL);
-	glCompileShader(this->fragmentShaderID);
-	CheckCompileErrors(this->fragmentShaderID, "FRAGMENT");
+	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShaderID, 1, &fragmentShaderCode, NULL);
+	glCompileShader(fragmentShaderID);
+	CheckCompileErrors(fragmentShaderID, "FRAGMENT");
 
 	//Create shader program and link each shader to the program
 	this->programID = glCreateProgram();
-	glAttachShader(this->programID, this->vertexShaderID);
-	glAttachShader(this->programID, this->fragmentShaderID);
-	glLinkProgram(this->programID);
-	CheckCompileErrors(this->vertexShaderID, "PROGRAM");
+	glAttachShader(programID, vertexShaderID);
+	glAttachShader(programID, fragmentShaderID);
+	glLinkProgram(programID);
+	CheckCompileErrors(vertexShaderID, "PROGRAM");
 
 	// Remove shader source from GPU
-	glDetachShader(this->programID, this->vertexShaderID);
-	glDetachShader(this->programID, this->fragmentShaderID);
+	glDetachShader(programID, vertexShaderID);
+	glDetachShader(programID, fragmentShaderID);
 	// Delete compiled shader binary
-	glDeleteShader(this->vertexShaderID);
-	glDeleteShader(this->fragmentShaderID);
+	glDeleteShader(vertexShaderID);
+	glDeleteShader(fragmentShaderID);
 }
 
 Shader::~Shader()
 {
-	//Delete program object
 	glDeleteProgram(this->programID);
 }
 
@@ -118,9 +120,7 @@ GLuint Shader::GetProgramID()
 	return this->programID;
 }
 
-void Shader::SetUniformToTextureUnit(const char *uniformName, uint8_t textureUnit)
+void Shader::SetUniformMatrix4fv(const char *uniformName, glm::mat4 *matrix)
 {
-	this->UseProgram();
-	glUniform1i(glGetUniformLocation(this->programID, uniformName), textureUnit);
-	this->TurnOffProgram();
+	glUniformMatrix4fv(glGetUniformLocation(this->programID, uniformName), 1, GL_FALSE, (GLfloat *)&matrix[0][0]);
 }

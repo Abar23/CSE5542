@@ -14,6 +14,8 @@ public:
 
 	void Draw();
 
+	void DrawWireFrame();
+
 	glm::mat4 GetModelMatrix();
 
 	void SetScale(glm::vec3 scale);

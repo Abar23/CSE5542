@@ -24,6 +24,17 @@ void Mesh::Draw()
 	glBindVertexArray(0);
 }
 
+void Mesh::DrawWireFrame()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBindVertexArray(this->vertexArray);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuffer);
+	glDrawElements(GL_TRIANGLES, this->meshIndices.size(), GL_UNSIGNED_INT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 void Mesh::CreateMesh()
 {
 	glGenVertexArrays(1, &this->vertexArray);

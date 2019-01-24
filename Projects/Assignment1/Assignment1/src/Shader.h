@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include <cstdint>
+#include <GLM\glm.hpp>
 #include "GL\glew.h"
 
 using namespace std;
@@ -19,14 +20,10 @@ public:
 
 	GLuint GetProgramID();
 
-	void SetUniformToTextureUnit(const char *uniformName, uint8_t textureUnit);
+	void SetUniformMatrix4fv(const char *uniformName, glm::mat4 *matrix);
 
 private:
 	GLuint programID;
-
-	GLuint vertexShaderID;
-
-	GLuint fragmentShaderID;
 };
 
 #endif //SHADER_H

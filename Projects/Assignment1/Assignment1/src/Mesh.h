@@ -21,6 +21,8 @@ public:
 	
 	void Draw();
 
+	void DrawWireFrame();
+
 private:
 	GLuint vertexArray, vertexBuffer, indexBuffer;
 

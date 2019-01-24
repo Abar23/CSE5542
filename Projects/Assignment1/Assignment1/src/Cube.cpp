@@ -88,9 +88,12 @@ Cube::~Cube()
 
 void Cube::Draw()
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	this->mesh->Draw();
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void Cube::DrawWireFrame()
+{
+	this->mesh->DrawWireFrame();
 }
 
 void Cube::CreateFace(

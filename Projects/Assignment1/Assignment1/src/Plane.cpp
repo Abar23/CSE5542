@@ -20,9 +20,12 @@ Plane::~Plane()
 
 void Plane::Draw()
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	this->mesh->Draw();
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void Plane::DrawWireFrame()
+{
+	this->mesh->DrawWireFrame();
 }
 
 std::vector<MeshVertex> Plane::SetVertices(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 color)

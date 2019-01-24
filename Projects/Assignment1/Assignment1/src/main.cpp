@@ -6,52 +6,51 @@
 #include "Shader.h"
 #include "Plane.h"
 #include "Cube.h"
+#include "Sphere.h"
 
 int main()
 {
 	Window *window = new Window(400, 400, "Test", NULL, NULL);
 
 	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");
-
 	primitiveShader->UseProgram();
-	Plane *plane = new Plane(4, 4, glm::vec3(-2.0f, -1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-	Cube *cube = new Cube(4, glm::vec3(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-	primitiveShader->TurnOffProgram();
 
-	plane->SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
-	cube->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
+	Plane *plane = new Plane(4, 4, glm::vec3(0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
+	Cube *cube = new Cube(2, glm::vec3(0.0f), glm::vec3(1.0f));
+	Sphere *sphere = new Sphere(24, 12, glm::vec3(0.0f), glm::vec3(0.2f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -5.0f));
-	
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -1.25f, -5.5f));
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
-
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
-	primitiveShader->UseProgram();
-	glUniformMatrix4fv(glGetUniformLocation(primitiveShader->GetProgramID(), "view"), 1, GL_FALSE, &viewMatrix[0][0]);
-	primitiveShader->TurnOffProgram();
+	primitiveShader->SetUniformMatrix4fv("view", &viewMatrix);
 
 	while (window->IsWindowClosed())
 	{
 		window->ClearBuffer();
 		glClearColor(0.0f, 0.5f, 0.5f, 1.0f);
-		
-		primitiveShader->UseProgram();
-		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
-		glUniformMatrix4fv(glGetUniformLocation(primitiveShader->GetProgramID(), "projection"), 1, GL_FALSE, &projectionMatrix[0][0]);
 
-		glUniformMatrix4fv(glGetUniformLocation(primitiveShader->GetProgramID(), "model"), 1, GL_FALSE, &cube->GetModelMatrix()[0][0]);
-		cube->Draw();
-		glUniformMatrix4fv(glGetUniformLocation(primitiveShader->GetProgramID(), "model"), 1, GL_FALSE, &plane->GetModelMatrix()[0][0]);
-		plane->Draw();
-		primitiveShader->TurnOffProgram();
+		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
+		primitiveShader->SetUniformMatrix4fv("projection", &projectionMatrix);
+		
+		primitiveShader->SetUniformMatrix4fv("model", &cube->GetModelMatrix());
+		cube->DrawWireFrame();
+
+		primitiveShader->SetUniformMatrix4fv("model", &plane->GetModelMatrix());
+		plane->DrawWireFrame();
+
+		primitiveShader->SetUniformMatrix4fv("model", &sphere->GetModelMatrix());
+		sphere->DrawWireFrame();
 
 		window->SwapBuffers();
 		window->PollEvents();
 		window->RefreshRate();
 	}
 
+	primitiveShader->TurnOffProgram();
+
+	delete sphere;
 	delete cube;
 	delete plane;
 	delete primitiveShader;
