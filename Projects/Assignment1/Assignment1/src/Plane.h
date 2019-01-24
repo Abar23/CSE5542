@@ -14,13 +14,17 @@ public:
 
 	void Draw();
 
+	glm::mat4 GetModelMatrix();
+
+	void SetScale(glm::vec3 scale);
+
 private:
 	Mesh *mesh;
 	glm::mat4 modelMatrix;
+	
+	static std::vector<MeshVertex> SetVertices(unsigned int heightSubdivision, unsigned int widthSubdivision, glm::vec3 color);
 
-	std::vector<MeshVertex> SetVertices(unsigned int heightSubdivision, unsigned int widthSubdivision, glm::vec3 color);
-
-	std::vector<unsigned int> SetIndices(unsigned int heightSubdivision, unsigned int widthSubdivision);
+	static std::vector<unsigned int> SetIndices(unsigned int heightSubdivision, unsigned int widthSubdivision);
 };
 
 #endif
