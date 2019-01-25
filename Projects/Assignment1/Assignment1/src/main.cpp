@@ -17,11 +17,11 @@ int main()
 	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");
 	primitiveShader->UseProgram();
 
-	Plane *plane = new Plane(4, 4, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	Cube *cube = new Cube(4, glm::vec3(0.0f), glm::vec3(1.0f));
-	Sphere *sphere = new Sphere(12, 12, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	Plane *plane = new Plane(8, 8, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	Cube *cube = new Cube(12, glm::vec3(0.0f), glm::vec3(1.0f));
+	Sphere *sphere = new Sphere(36, 18, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	Cylinder *cylinder = new Cylinder(12, 36, glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.0f, 0.0f));
-	Cone *cone = new Cone(6, 16, glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+	Cone *cone = new Cone(12, 32, glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -1.25f, -5.5f));

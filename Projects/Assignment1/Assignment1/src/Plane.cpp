@@ -39,7 +39,7 @@ std::vector<MeshVertex> Plane::SetVertices(unsigned int heightSubdivisions, unsi
 
 	for (unsigned int i = 0; i <= heightSubdivisions; i++)
 	{
-		float zPosition = ((float)i * heightStep) - 0.5f;
+		float zPosition = 0.5f - ((float)i * heightStep);
 		for (unsigned int j = 0; j <= widthSubdivisions; j++)
 		{
 			float xPosition = ((float)j * widthStep) - 0.5f;
