@@ -1,7 +1,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#include <GLM\gtx\transform.hpp>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "GLM\gtx\transform.hpp"
 #include "Sphere.h"
 
 Sphere::Sphere(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color)
@@ -50,8 +50,8 @@ std::vector<MeshVertex> Sphere::SetVertices(unsigned int stacks, unsigned int se
 	MeshVertex vertex;
 	vertex.color = *color;
 
-	float sectorStep = (2 * M_PI) / (float)sectors;
-	float stackStep = (M_PI) / (float)stacks;
+	float sectorStep = (float)(2 * M_PI) / (sectors);
+	float stackStep = (float)(M_PI) / stacks;
 	float currentSectorAngle = 0.0f;
 	float currentStackAngle = 0.0f;
 

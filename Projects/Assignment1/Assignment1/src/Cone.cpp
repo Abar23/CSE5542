@@ -2,9 +2,9 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "GLM\gtx\transform.hpp"
-#include "Cylinder.h"
+#include "Cone.h"
 
-Cylinder::Cylinder(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color)
+Cone::Cone(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color)
 {
 	this->modelMatrix = glm::mat4(1.0f);
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
@@ -14,27 +14,27 @@ Cylinder::Cylinder(unsigned int stacks, unsigned int sectors, glm::vec3 position
 	this->mesh = new Mesh(vertices, indices);
 }
 
-Cylinder::~Cylinder()
+Cone::~Cone()
 {
 	delete this->mesh;
 }
 
-void Cylinder::Draw()
+void Cone::Draw()
 {
 	this->mesh->Draw();
 }
 
-void Cylinder::DrawWireFrame()
+void Cone::DrawWireFrame()
 {
 	this->mesh->DrawWireFrame();
 }
 
-glm::mat4 Cylinder::GetModelMatrix()
+glm::mat4 Cone::GetModelMatrix()
 {
 	return this->modelMatrix;
 }
 
-void Cylinder::SetScale(glm::vec3 scale)
+void Cone::SetScale(glm::vec3 scale)
 {
 	float xPosition = this->modelMatrix[0][3];
 	float yPosition = this->modelMatrix[1][3];
@@ -44,7 +44,7 @@ void Cylinder::SetScale(glm::vec3 scale)
 	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(xPosition, yPosition, zPosition));
 }
 
-std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 * color)
+std::vector<MeshVertex> Cone::SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 * color)
 {
 	std::vector<MeshVertex> vertices;
 	MeshVertex vertex;
@@ -53,19 +53,17 @@ std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int 
 	float stackStep = 1.0f / stacks;
 	float sectorStep = (float)(2 * M_PI) / sectors;
 
-	vertex.position = glm::vec3(0.0f, 0.5f, 0.0f);
-	vertices.push_back(vertex);
-
-	float sectorAngle = 0.0f;
 	glm::vec3 point = glm::vec3(0.0f);
 	for (unsigned int i = 0; i <= stacks; i++)
 	{
-		point.y = 0.5f - (stackStep * i);
+		float heightParameter = 1.0f - (stackStep * i);
+		point.y = heightParameter - 0.5f;
 		for (unsigned int j = 0; j <= sectors; j++)
 		{
-			sectorAngle = sectorStep * j;
-			point.x = 0.5f * cosf(sectorAngle);
-			point.z = 0.5f * sinf(sectorAngle);
+			float sectorAngle = sectorStep * j;
+			float heightRatio = (1.0f - heightParameter) / 1.0f;
+			point.x = heightRatio * 0.5f * cosf(sectorAngle);
+			point.z = heightRatio * 0.5f * sinf(sectorAngle);
 			vertex.position = point;
 			vertices.push_back(vertex);
 		}
@@ -77,42 +75,39 @@ std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int 
 	return vertices;
 }
 
-std::vector<unsigned int> Cylinder::SetIndices(unsigned int stacks, unsigned int sectors)
+std::vector<unsigned int> Cone::SetIndices(unsigned int stacks, unsigned int sectors)
 {
 	std::vector<unsigned int> indices;
 	unsigned int currentStackIndex = 0;
 	unsigned int nextStackIndex = 0;
 
-	// Setup top face indices
-	nextStackIndex++;
-	for (unsigned int i = 0; i < sectors; i++)
-	{
-		indices.push_back(currentStackIndex);
-		indices.push_back(nextStackIndex);
-		indices.push_back(nextStackIndex + 1);
-		nextStackIndex++;
-	}
-
-	//Create indices for middle region
 	for (unsigned int i = 0; i < stacks; i++)
 	{
-		currentStackIndex = (i * (sectors + 1)) + 1;
+		currentStackIndex = i * (sectors + 1);
 		nextStackIndex = currentStackIndex + sectors + 1;
 		for (unsigned int j = 0; j < sectors; j++)
 		{
-			indices.push_back(currentStackIndex);
-			indices.push_back(nextStackIndex);
-			indices.push_back(currentStackIndex + 1);
-			indices.push_back(currentStackIndex + 1);
-			indices.push_back(nextStackIndex);
-			indices.push_back(nextStackIndex + 1);
+			if (i == 0)
+			{
+				indices.push_back(currentStackIndex);
+				indices.push_back(nextStackIndex);
+				indices.push_back(nextStackIndex + 1);
+			}
+			else
+			{
+				indices.push_back(currentStackIndex);
+				indices.push_back(nextStackIndex);
+				indices.push_back(currentStackIndex + 1);
+				indices.push_back(currentStackIndex + 1);
+				indices.push_back(nextStackIndex);
+				indices.push_back(nextStackIndex + 1);
+			}
 			currentStackIndex++;
 			nextStackIndex++;
 		}
 	}
-
 	//Setup bottom face indices
-	nextStackIndex = ((sectors + 1) * (stacks + 1)) + 1;
+	nextStackIndex = (sectors + 1) * (stacks + 1);
 	currentStackIndex = nextStackIndex - (sectors + 1);
 	for (unsigned int i = 0; i < sectors; i++)
 	{

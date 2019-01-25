@@ -1,5 +1,5 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#include <GLM\gtx\transform.hpp>
+#include "GLM\gtx\transform.hpp"
 #include "Cube.h"
 
 Cube::Cube(unsigned int faceSubdivisions, glm::vec3 position, glm::vec3 color)

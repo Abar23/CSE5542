@@ -1,15 +1,15 @@
-#ifndef CYLINDER_H
-#define CYLINDER_H
+#ifndef CONE_H
+#define CONE_H
 
 #include "GLM\glm.hpp"
 #include "Mesh.h"
 
-class Cylinder
+class Cone
 {
 public:
-	Cylinder(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color);
+	Cone(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color);
 
-	~Cylinder();
+	~Cone();
 
 	void Draw();
 
@@ -28,4 +28,4 @@ private:
 	std::vector<unsigned int> SetIndices(unsigned int stacks, unsigned int sectors);
 };
 
-#endif //CYLINDER_H
+#endif //CONE_H

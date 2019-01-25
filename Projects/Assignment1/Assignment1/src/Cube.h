@@ -1,8 +1,8 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#include <GLM\glm.hpp>
 #include <vector>
+#include "GLM\glm.hpp"
 #include "Mesh.h"
 
 class Cube

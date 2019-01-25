@@ -1,8 +1,7 @@
 #define GLEW_STATIC
-
-#include "Window.h"
 #include <cstdio>
 #include <cstdlib>
+#include "Window.h"
 
 void setFrameBufferSize(GLFWwindow *window, int width, int height)
 {

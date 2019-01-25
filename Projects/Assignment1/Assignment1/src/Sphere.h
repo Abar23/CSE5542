@@ -2,7 +2,7 @@
 #define SPHERE_H
 
 #include <vector>
-#include <GLM\glm.hpp>
+#include "GLM\glm.hpp"
 #include "Mesh.h"
 
 class Sphere

@@ -1,6 +1,6 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#include <GLM\gtx\transform.hpp>
 #include <iostream>
+#include "GLM\gtx\transform.hpp"
 #include "Plane.h"
 
 Plane::Plane(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 position, glm::vec3 color)

@@ -2,7 +2,7 @@
 #define SHADER_H
 
 #include <cstdint>
-#include <GLM\glm.hpp>
+#include "GLM\glm.hpp"
 #include "GL\glew.h"
 
 using namespace std;
