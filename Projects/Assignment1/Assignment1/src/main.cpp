@@ -7,6 +7,7 @@
 #include "Plane.h"
 #include "Cube.h"
 #include "Sphere.h"
+#include "Cylinder.h"
 
 int main()
 {
@@ -15,9 +16,10 @@ int main()
 	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");
 	primitiveShader->UseProgram();
 
-	Plane *plane = new Plane(4, 4, glm::vec3(0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
+	Plane *plane = new Plane(4, 4, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
 	Cube *cube = new Cube(2, glm::vec3(0.0f), glm::vec3(1.0f));
-	Sphere *sphere = new Sphere(24, 12, glm::vec3(0.0f), glm::vec3(0.2f));
+	Sphere *sphere = new Sphere(36, 18, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.2f));
+	Cylinder *cylinder = new Cylinder(8, 24, glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.0f, 0.0f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -1.25f, -5.5f));
@@ -43,6 +45,9 @@ int main()
 		primitiveShader->SetUniformMatrix4fv("model", &sphere->GetModelMatrix());
 		sphere->DrawWireFrame();
 
+		primitiveShader->SetUniformMatrix4fv("model", &cylinder->GetModelMatrix());
+		cylinder->DrawWireFrame();
+
 		window->SwapBuffers();
 		window->PollEvents();
 		window->RefreshRate();
@@ -50,6 +55,7 @@ int main()
 
 	primitiveShader->TurnOffProgram();
 
+	delete cylinder;
 	delete sphere;
 	delete cube;
 	delete plane;

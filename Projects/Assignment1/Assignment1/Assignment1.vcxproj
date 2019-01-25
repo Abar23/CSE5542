@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cylinder.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\Cube.cpp" />
     <ClCompile Include="src\Plane.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cylinder.h" />
     <ClInclude Include="src\Sphere.h" />
     <ClInclude Include="src\Cube.h" />
     <ClInclude Include="src\Plane.h" />

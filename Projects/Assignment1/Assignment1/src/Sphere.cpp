@@ -92,7 +92,7 @@ std::vector<unsigned int> Sphere::SetIndices(unsigned int stacks, unsigned int s
 				indices.push_back(nextStackIndex);
 				indices.push_back(currentStackIndex + 1);
 			}
-			else if (i == stacks + 1)
+			else if (i == stacks - 1)
 			{
 				indices.push_back(currentStackIndex);
 				indices.push_back(nextStackIndex);
