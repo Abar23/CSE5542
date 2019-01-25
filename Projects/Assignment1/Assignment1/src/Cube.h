@@ -3,32 +3,26 @@
 
 #include <vector>
 #include "GLM\glm.hpp"
+#include "Shape.h"
 #include "Mesh.h"
 
-class Cube
+#define NUM_FACES 6
+
+class Cube : public Shape
 {
 public:
 	Cube(unsigned int faceSubdivisions, glm::vec3 position, glm::vec3 color);
 	
 	~Cube();
 
-	void Draw();
-
-	void DrawWireFrame();
-
-	glm::mat4 GetModelMatrix();
-
-	void SetScale(glm::vec3 scale);
-
 private:
-	Mesh *mesh;
-	glm::mat4 modelMatrix;
+	static std::vector<MeshVertex> SetAllFaceVertices(unsigned int faceSubdivisions, glm::vec3 *color);
 
-	static void CreateFace(
+	static std::vector<unsigned int> SetAllFaceIndices(unsigned int faceSubdivisions);
+
+	static void CreateFaceVertices(
 		std::vector<MeshVertex> *vertices, 
-		std::vector<unsigned int> *indices, 
 		glm::vec3 *color, 
-		unsigned int *currentIndex, 
 		float x, float y, float z,
 		float xDirectionOuter, float yDirectionOuter, float zDirectionOuter,
 		float xDirectionInner, float yDirectionInner, float zDirectionInner, 

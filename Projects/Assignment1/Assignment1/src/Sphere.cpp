@@ -4,44 +4,14 @@
 #include "GLM\gtx\transform.hpp"
 #include "Sphere.h"
 
-Sphere::Sphere(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color)
+Sphere::Sphere(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color) : 
+	Shape(SetVertices(stacks, sectors, &color), SetIndices(stacks, sectors))
 {
-	this->modelMatrix = glm::mat4(1.0f);
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
-
-	std::vector<MeshVertex> vertices = SetVertices(stacks, sectors, &color);
-	std::vector<unsigned int> indices = SetIndices(stacks, sectors);
-	this->mesh = new Mesh(vertices, indices);
 }
 
 Sphere::~Sphere()
 {
-	delete this->mesh;
-}
-
-void Sphere::Draw()
-{
-	this->mesh->Draw();
-}
-
-void Sphere::DrawWireFrame()
-{
-	this->mesh->DrawWireFrame();
-}
-
-glm::mat4 Sphere::GetModelMatrix()
-{
-	return this->modelMatrix;
-}
-
-void Sphere::SetScale(glm::vec3 scale)
-{
-	float xPosition = this->modelMatrix[0][3];
-	float yPosition = this->modelMatrix[1][3];
-	float zPosition = this->modelMatrix[2][3];
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(-xPosition, -yPosition, -zPosition));
-	this->modelMatrix = glm::scale(this->modelMatrix, scale);
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(xPosition, yPosition, zPosition));
 }
 
 std::vector<MeshVertex> Sphere::SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 * color)

@@ -4,44 +4,14 @@
 #include "GLM\gtx\transform.hpp"
 #include "Cylinder.h"
 
-Cylinder::Cylinder(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color)
+Cylinder::Cylinder(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color) :
+	Shape(SetVertices(stacks, sectors, &color), SetIndices(stacks, sectors))
 {
-	this->modelMatrix = glm::mat4(1.0f);
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
-
-	std::vector<MeshVertex> vertices = SetVertices(stacks, sectors, &color);
-	std::vector<unsigned int> indices = SetIndices(stacks, sectors);
-	this->mesh = new Mesh(vertices, indices);
 }
 
 Cylinder::~Cylinder()
 {
-	delete this->mesh;
-}
-
-void Cylinder::Draw()
-{
-	this->mesh->Draw();
-}
-
-void Cylinder::DrawWireFrame()
-{
-	this->mesh->DrawWireFrame();
-}
-
-glm::mat4 Cylinder::GetModelMatrix()
-{
-	return this->modelMatrix;
-}
-
-void Cylinder::SetScale(glm::vec3 scale)
-{
-	float xPosition = this->modelMatrix[0][3];
-	float yPosition = this->modelMatrix[1][3];
-	float zPosition = this->modelMatrix[2][3];
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(-xPosition, -yPosition, -zPosition));
-	this->modelMatrix = glm::scale(this->modelMatrix, scale);
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(xPosition, yPosition, zPosition));
 }
 
 std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 * color)

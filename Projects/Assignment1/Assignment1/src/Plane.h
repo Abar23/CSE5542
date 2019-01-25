@@ -3,27 +3,17 @@
 
 #include <vector>
 #include "GLM\glm.hpp"
+#include "Shape.h"
 #include "Mesh.h"
 
-class Plane
+class Plane : public Shape
 {
 public:
 	Plane(unsigned int heightSubdivision, unsigned int widthSubdivision, glm::vec3 position, glm::vec3 color);
 	
-	~Plane(); 
-
-	void Draw();
-
-	void DrawWireFrame();
-
-	glm::mat4 GetModelMatrix();
-
-	void SetScale(glm::vec3 scale);
+	~Plane();
 
 private:
-	Mesh *mesh;
-	glm::mat4 modelMatrix;
-	
 	static std::vector<MeshVertex> SetVertices(unsigned int heightSubdivision, unsigned int widthSubdivision, glm::vec3 color);
 
 	static std::vector<unsigned int> SetIndices(unsigned int heightSubdivision, unsigned int widthSubdivision);

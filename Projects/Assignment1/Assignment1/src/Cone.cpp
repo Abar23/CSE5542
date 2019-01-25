@@ -4,44 +4,14 @@
 #include "GLM\gtx\transform.hpp"
 #include "Cone.h"
 
-Cone::Cone(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color)
+Cone::Cone(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color) : 
+	Shape(SetVertices(stacks, sectors, &color), SetIndices(stacks, sectors))
 {
-	this->modelMatrix = glm::mat4(1.0f);
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
-
-	std::vector<MeshVertex> vertices = SetVertices(stacks, sectors, &color);
-	std::vector<unsigned int> indices = SetIndices(stacks, sectors);
-	this->mesh = new Mesh(vertices, indices);
 }
 
 Cone::~Cone()
 {
-	delete this->mesh;
-}
-
-void Cone::Draw()
-{
-	this->mesh->Draw();
-}
-
-void Cone::DrawWireFrame()
-{
-	this->mesh->DrawWireFrame();
-}
-
-glm::mat4 Cone::GetModelMatrix()
-{
-	return this->modelMatrix;
-}
-
-void Cone::SetScale(glm::vec3 scale)
-{
-	float xPosition = this->modelMatrix[0][3];
-	float yPosition = this->modelMatrix[1][3];
-	float zPosition = this->modelMatrix[2][3];
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(-xPosition, -yPosition, -zPosition));
-	this->modelMatrix = glm::scale(this->modelMatrix, scale);
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(xPosition, yPosition, zPosition));
 }
 
 std::vector<MeshVertex> Cone::SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 * color)

@@ -3,29 +3,14 @@
 #include "GLM\gtx\transform.hpp"
 #include "Plane.h"
 
-Plane::Plane(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 position, glm::vec3 color)
+Plane::Plane(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 position, glm::vec3 color) : 
+	Shape(SetVertices(heightSubdivisions, widthSubdivisions, color), SetIndices(heightSubdivisions, widthSubdivisions))
 {
-	this->modelMatrix = glm::mat4(1.0f);
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
-
-	std::vector<MeshVertex> planeVertices = SetVertices(heightSubdivisions, widthSubdivisions, color);
-	std::vector<unsigned int> planeIndices = SetIndices(heightSubdivisions, widthSubdivisions);
-	this->mesh = new Mesh(planeVertices, planeIndices);
 }
 
 Plane::~Plane()
 {
-	delete this->mesh;
-}
-
-void Plane::Draw()
-{
-	this->mesh->Draw();
-}
-
-void Plane::DrawWireFrame()
-{
-	this->mesh->DrawWireFrame();
 }
 
 std::vector<MeshVertex> Plane::SetVertices(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 color)
@@ -73,19 +58,4 @@ std::vector<unsigned int> Plane::SetIndices(unsigned int heightSubdivisions, uns
 	}
 
 	return indices;
-}
-
-glm::mat4 Plane::GetModelMatrix()
-{
-	return this->modelMatrix;
-}
-
-void Plane::SetScale(glm::vec3 scale)
-{
-	float xPosition = this->modelMatrix[0][3];
-	float yPosition = this->modelMatrix[1][3];
-	float zPosition = this->modelMatrix[2][3];
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(-xPosition, -yPosition, -zPosition));
-	this->modelMatrix = glm::scale(this->modelMatrix, scale);
-	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(xPosition, yPosition, zPosition));
 }

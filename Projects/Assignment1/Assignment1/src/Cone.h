@@ -1,31 +1,22 @@
 #ifndef CONE_H
 #define CONE_H
 
+#include <vector>
 #include "GLM\glm.hpp"
+#include "Shape.h"
 #include "Mesh.h"
 
-class Cone
+class Cone : public Shape
 {
 public:
 	Cone(unsigned int stacks, unsigned int sectors, glm::vec3 position, glm::vec3 color);
 
 	~Cone();
 
-	void Draw();
-
-	void DrawWireFrame();
-
-	glm::mat4 GetModelMatrix();
-
-	void SetScale(glm::vec3 scale);
-
 private:
-	Mesh *mesh;
-	glm::mat4 modelMatrix;
+	static std::vector<MeshVertex> SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 *color);
 
-	std::vector<MeshVertex> SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 *color);
-
-	std::vector<unsigned int> SetIndices(unsigned int stacks, unsigned int sectors);
+	static std::vector<unsigned int> SetIndices(unsigned int stacks, unsigned int sectors);
 };
 
 #endif //CONE_H
