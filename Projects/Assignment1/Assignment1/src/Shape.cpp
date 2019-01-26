@@ -13,14 +13,16 @@ Shape::~Shape()
 	delete this->mesh;
 }
 
-void Shape::Draw()
+void Shape::Draw(bool wireFrame)
 {
-	this->mesh->Draw();
-}
-
-void Shape::DrawWireFrame()
-{
-	this->mesh->DrawWireFrame();
+	if (wireFrame)
+	{
+		this->mesh->DrawWireFrame();
+	}
+	else
+	{
+		this->mesh->Draw();
+	}
 }
 
 glm::mat4 Shape::GetModelMatrix()
@@ -28,12 +30,17 @@ glm::mat4 Shape::GetModelMatrix()
 	return this->modelMatrix;
 }
 
-void Shape::SetScale(glm::vec3 scale)
+void Shape::SetModelMatrix(glm::mat4 *matrix)
+{
+	this->modelMatrix = *matrix;
+}
+
+void Shape::SetScale(glm::vec3 *scale)
 {
 	float xPosition = this->modelMatrix[0][3];
 	float yPosition = this->modelMatrix[1][3];
 	float zPosition = this->modelMatrix[2][3];
 	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(-xPosition, -yPosition, -zPosition));
-	this->modelMatrix = glm::scale(this->modelMatrix, scale);
+	this->modelMatrix = glm::scale(this->modelMatrix, *scale);
 	this->modelMatrix = glm::translate(this->modelMatrix, glm::vec3(xPosition, yPosition, zPosition));
 }

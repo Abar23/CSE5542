@@ -10,6 +10,8 @@
 #include "Cylinder.h"
 #include "Cone.h"
 #include "Shape.h"
+#include "HierachicalModel.h"
+#include "ModelNode.h"
 
 int main()
 {
@@ -18,16 +20,12 @@ int main()
 	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");
 	primitiveShader->UseProgram();
 
-	Shape *plane = new Plane(8, 8, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	Shape *cube = new Cube(12, glm::vec3(0.0f), glm::vec3(1.0f));
-	Shape *sphere = new Sphere(36, 18, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	Shape *cylinder = new Cylinder(12, 36, glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.0f, 0.0f));
-	Shape *cone = new Cone(12, 32, glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-
-	std::vector<Shape *> shapesToRender = {plane, cube, sphere, cylinder, cone};
+	Shape *groundPlane = new Plane(8, 8, glm::vec3(0.0f), glm::vec3(1.0f));
+	groundPlane->SetScale(&glm::vec3(8.0f, 0.0f, 4.0f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -1.25f, -5.5f));
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -1.25f, -7.0f));
+	viewMatrix = glm::rotate(viewMatrix, glm::radians(15.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
@@ -40,12 +38,9 @@ int main()
 
 		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
 		primitiveShader->SetUniformMatrix4fv("projection", &projectionMatrix);
-		
-		for (Shape *shape : shapesToRender)
-		{
-			primitiveShader->SetUniformMatrix4fv("model", &shape->GetModelMatrix());
-			shape->DrawWireFrame();
-		}
+
+		primitiveShader->SetUniformMatrix4fv("model", &groundPlane->GetModelMatrix());
+		groundPlane->Draw(true);
 
 		window->SwapBuffers();
 		window->PollEvents();
@@ -54,11 +49,7 @@ int main()
 
 	primitiveShader->TurnOffProgram();
 
-	delete cone;
-	delete cylinder;
-	delete sphere;
-	delete cube;
-	delete plane;
+	delete groundPlane;
 	delete primitiveShader;
 	delete window;
 	return 0;

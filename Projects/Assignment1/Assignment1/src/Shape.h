@@ -13,13 +13,13 @@ public:
 
 	virtual ~Shape();
 
-	void Draw();
-
-	void DrawWireFrame();
+	void Draw(bool wireFrame);
 
 	glm::mat4 GetModelMatrix();
 
-	void SetScale(glm::vec3 scale);
+	void SetModelMatrix(glm::mat4 *matrix);
+
+	void SetScale(glm::vec3 *scale);
 
 protected:
 	Mesh *mesh;

@@ -123,6 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\HierachicalModel.cpp" />
+    <ClCompile Include="src\ModelNode.cpp" />
     <ClCompile Include="src\Cone.cpp" />
     <ClCompile Include="src\Cylinder.cpp" />
     <ClCompile Include="src\Shape.cpp" />
@@ -135,6 +137,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\HierachicalModel.h" />
+    <ClInclude Include="src\ModelNode.h" />
     <ClInclude Include="src\Cone.h" />
     <ClInclude Include="src\Cylinder.h" />
     <ClInclude Include="src\Shape.h" />
