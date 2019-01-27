@@ -15,11 +15,11 @@ int main()
 	primitiveShader->UseProgram();
 
 	RobotModel *robot = new RobotModel(primitiveShader);
-	Shape *groundPlane = new Plane(12, 12, glm::vec3(0.0f), glm::vec3(1.0f));
+	Shape *groundPlane = new Plane(16, 16, glm::vec3(0.0f), glm::vec3(1.0f));
 	groundPlane->SetScale(&glm::vec3(12.0f, 0.0f, 12.0f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.5f, -3.0f, -21.0f));
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -3.0f, -21.0f));
 	viewMatrix = glm::rotate(viewMatrix, glm::radians(15.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	viewMatrix = glm::rotate(viewMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);

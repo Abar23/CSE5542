@@ -13,6 +13,9 @@
 #define LEFT_ARM_CHILD_INDEX 3
 #define RIGHT_ARM_CHILD_INDEX 4
 
+#define NUM_ARM_COMPONENTS 4
+#define NUM_LEG_COMPONENTS 5
+
 RobotModel::RobotModel(Shader *shader)
 {
 	//Body
@@ -33,7 +36,7 @@ RobotModel::RobotModel(Shader *shader)
 	ModelNode *leftLegTopSegmentNode = new ModelNode(leftLegTopSegment, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f));
 	ModelNode *leftLegBottomJointNode = new ModelNode(leftLegBottomJoint, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
 	ModelNode *leftLegBottomSegmentNode = new ModelNode(leftLegBottomSegment, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f));
-	ModelNode *leftFootNode = new ModelNode(leftFoot, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f));
+	ModelNode *leftFootNode = new ModelNode(leftFoot, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.25f, 1.0f, 1.25f));
 
 	//Left leg
 	Shape *rightLegTopJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
@@ -45,27 +48,27 @@ RobotModel::RobotModel(Shader *shader)
 	ModelNode *rightLegTopSegmentNode = new ModelNode(rightLegTopSegment, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f));
 	ModelNode *rightLegBottomJointNode = new ModelNode(rightLegBottomJoint, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
 	ModelNode *rightLegBottomSegmentNode = new ModelNode(rightLegBottomSegment, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f));
-	ModelNode *rightFootNode = new ModelNode(rightFoot, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f));
+	ModelNode *rightFootNode = new ModelNode(rightFoot, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.25f, 1.0f, 1.25f));
 
 	//Left Arm
 	Shape *leftArmShoulderJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *leftArmTopSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
 	Shape *leftArmElbowJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *leftArmBottomSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
-	ModelNode *leftArmShoulderJointNode = new ModelNode(leftArmShoulderJoint, glm::vec3(-2.0f, 1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
-	ModelNode *leftArmTopSegmentNode = new ModelNode(leftArmTopSegment, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
+	ModelNode *leftArmShoulderJointNode = new ModelNode(leftArmShoulderJoint, glm::vec3(-1.75f, 1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
+	ModelNode *leftArmTopSegmentNode = new ModelNode(leftArmTopSegment, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.75f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
 	ModelNode *leftArmElbowJointNode = new ModelNode(leftArmElbowJoint, glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
-	ModelNode *leftArmBottomSegmentNode = new ModelNode(leftArmBottomSegment, glm::vec3(-0.9f, 0.0f, 0.0f), glm::vec3(0.5f, 1.5f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 90.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
+	ModelNode *leftArmBottomSegmentNode = new ModelNode(leftArmBottomSegment, glm::vec3(-0.9f, 0.0f, 0.0f), glm::vec3(0.5f, 1.75f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 90.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
 
 	//Right Arm
 	Shape *rightArmShoulderJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *rightArmTopSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
 	Shape *rightArmElbowJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *rightArmBottomSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
-	ModelNode *rightArmShoulderJointNode = new ModelNode(rightArmShoulderJoint, glm::vec3(2.0f, 1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
-	ModelNode *rightArmTopSegmentNode = new ModelNode(rightArmTopSegment, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
+	ModelNode *rightArmShoulderJointNode = new ModelNode(rightArmShoulderJoint, glm::vec3(1.75f, 1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
+	ModelNode *rightArmTopSegmentNode = new ModelNode(rightArmTopSegment, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.75f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 45.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
 	ModelNode *rightArmElbowJointNode = new ModelNode(rightArmElbowJoint, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
-	ModelNode *rightArmBottomSegmentNode = new ModelNode(rightArmBottomSegment, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 90.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
+	ModelNode *rightArmBottomSegmentNode = new ModelNode(rightArmBottomSegment, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.75f, 0.5f), glm::vec3(0.0f, 0.0f, 1.0f), 90.0f, glm::vec3(0.0f, 0.0f, 1.0f), 90.0f);
 
 	// Add left leg to hierarchy
 	root->AddChildNode(leftLegTopJointNode);
@@ -119,60 +122,40 @@ void RobotModel::Update()
 	transform = body->UpdateModelMatrix(&transform);
 
 	matrixStack.push(transform);
-	ModelNode *node = body->GetChildAt(LEFT_LEG_CHILD_INDEX);
-	for (unsigned int i = 0; i <= 4; i++)
-	{
-		transform = node->UpdateModelMatrix(&transform);
-		if (i != 4)
-		{
-			node = node->GetChildAt(0);
-		}
-	}
+	UpdateAppendage(LEFT_LEG_CHILD_INDEX, NUM_LEG_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
 	matrixStack.push(transform);
-	node = body->GetChildAt(RIGHT_LEG_CHILD_INDEX);
-	for (unsigned int i = 0; i <= 4; i++)
-	{
-		transform = node->UpdateModelMatrix(&transform);
-		if (i != 4)
-		{
-			node = node->GetChildAt(0);
-		}
-	}
+	UpdateAppendage(RIGHT_LEG_CHILD_INDEX, NUM_LEG_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
 	matrixStack.push(transform);
-	node = body->GetChildAt(HEAD_CHILD_INDEX);
-	transform = node->UpdateModelMatrix(&transform);
+	UpdateAppendage(HEAD_CHILD_INDEX, 1, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
 	matrixStack.push(transform);
-	node = body->GetChildAt(LEFT_ARM_CHILD_INDEX);
-	for (unsigned int i = 0; i <= 3; i++)
-	{
-		transform = node->UpdateModelMatrix(&transform);
-		if (i != 3)
-		{
-			node = node->GetChildAt(0);
-		}
-	}
+	UpdateAppendage(LEFT_ARM_CHILD_INDEX, NUM_ARM_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
 	matrixStack.push(transform);
-	node = body->GetChildAt(RIGHT_ARM_CHILD_INDEX);
-	for (unsigned int i = 0; i <= 3; i++)
+	UpdateAppendage(RIGHT_ARM_CHILD_INDEX, NUM_ARM_COMPONENTS, body, &transform);
+	transform = matrixStack.top();
+	matrixStack.pop();
+}
+
+void RobotModel::UpdateAppendage(unsigned int childIndexOfModel, unsigned int numberOfComponents, ModelNode *body, glm::mat4 *transform)
+{
+	ModelNode *node = body->GetChildAt(childIndexOfModel);
+	for (unsigned int i = 0; i < numberOfComponents; i++)
 	{
-		transform = node->UpdateModelMatrix(&transform);
-		if (i != 3)
+		*transform = node->UpdateModelMatrix(transform);
+		if (i != numberOfComponents - 1)
 		{
 			node = node->GetChildAt(0);
 		}
 	}
-	transform = matrixStack.top();
-	matrixStack.pop();
 }

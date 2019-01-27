@@ -18,6 +18,8 @@ public:
 private:
 	HierarchicalModel *hierarchy;
 	Shader *shader;
+
+	static void UpdateAppendage(unsigned int childIndexOfModel, unsigned int numberOfComponents, ModelNode *body, glm::mat4 *transform);
 };
 
 #endif //ROBOTMODEL_H
