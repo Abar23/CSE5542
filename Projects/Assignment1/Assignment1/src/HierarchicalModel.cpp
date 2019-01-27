@@ -1,12 +1,12 @@
 #include <stack>
-#include "HierachicalModel.h"
+#include "HierarchicalModel.h"
 
-HierachicalModel::HierachicalModel(ModelNode *rootNode)
+HierarchicalModel::HierarchicalModel(ModelNode *rootNode)
 {
 	this->rootNode = rootNode;
 }
 
-HierachicalModel::~HierachicalModel()
+HierarchicalModel::~HierarchicalModel()
 {
 	stack<ModelNode *> nodeStack;
 	nodeStack.push(this->rootNode);
@@ -25,12 +25,12 @@ HierachicalModel::~HierachicalModel()
 	}
 }
 
-ModelNode * HierachicalModel::GetRootNode()
+ModelNode * HierarchicalModel::GetRootNode()
 {
 	return this->rootNode;
 }
 
-void HierachicalModel::Draw(bool wireFrame, Shader *shader)
+void HierarchicalModel::Draw(bool wireFrame, Shader *shader)
 {
 	stack<ModelNode *> nodeStack;
 	nodeStack.push(this->rootNode);

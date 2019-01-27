@@ -8,9 +8,11 @@
 class ModelNode
 {
 public:
-	ModelNode(Shape *shape, ModelNode *parentNode, glm::vec3 translation, glm::vec3 axis, float angle);
+	ModelNode(Shape *shape, glm::vec3 translation, glm::vec3 scale, glm::vec3 axis, float angle, glm::vec3 localAxis, float localAngle);
 
-	ModelNode(Shape *shape, ModelNode *parentNode, glm::vec3 translation);
+	ModelNode(Shape *shape, glm::vec3 translation, glm::vec3 scale, glm::vec3 axis, float angle);
+
+	ModelNode(Shape *shape, glm::vec3 translation, glm::vec3 scale);
 
 	~ModelNode();
 
@@ -20,20 +22,21 @@ public:
 
 	ModelNode * GetChildAt(int index);
 
-	ModelNode * GetParent();
-
 	int NumberOfChildren();
 
 	Shape * GetShape();
 
 private:
 	Shape *shape;
-	ModelNode *parentNode;
 	vector<ModelNode *> childNodes;
 	glm::vec3 translation;
+	glm::vec3 scale;
 	glm::vec3 axisOfRotation;
+	glm::vec3 localAxisOfRotation;
 	float angle;
+	float localAngle;
 	bool nodeShouldRotate;
+	bool nodeShouldRotateLocally;
 };
 
 #endif //MODELNODE_H

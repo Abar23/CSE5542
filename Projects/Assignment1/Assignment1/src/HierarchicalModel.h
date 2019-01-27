@@ -4,12 +4,12 @@
 #include "ModelNode.h"
 #include "Shader.h"
 
-class HierachicalModel
+class HierarchicalModel
 {
 public:
-	HierachicalModel(ModelNode *rootNode);
+	HierarchicalModel(ModelNode *rootNode);
 
-	~HierachicalModel();
+	~HierarchicalModel();
 
 	ModelNode * GetRootNode();
 

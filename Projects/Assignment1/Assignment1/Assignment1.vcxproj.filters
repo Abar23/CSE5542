@@ -48,7 +48,10 @@
     <ClCompile Include="src\ModelNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\HierachicalModel.cpp">
+    <ClCompile Include="src\RobotModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HierarchicalModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,7 +86,10 @@
     <ClInclude Include="src\ModelNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\HierachicalModel.h">
+    <ClInclude Include="src\RobotModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HierarchicalModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

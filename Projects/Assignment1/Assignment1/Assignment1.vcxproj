@@ -123,7 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\HierachicalModel.cpp" />
+    <ClCompile Include="src\RobotModel.cpp" />
+    <ClCompile Include="src\HierarchicalModel.cpp" />
     <ClCompile Include="src\ModelNode.cpp" />
     <ClCompile Include="src\Cone.cpp" />
     <ClCompile Include="src\Cylinder.cpp" />
@@ -137,7 +138,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\HierachicalModel.h" />
+    <ClInclude Include="src\RobotModel.h" />
+    <ClInclude Include="src\HierarchicalModel.h" />
     <ClInclude Include="src\ModelNode.h" />
     <ClInclude Include="src\Cone.h" />
     <ClInclude Include="src\Cylinder.h" />

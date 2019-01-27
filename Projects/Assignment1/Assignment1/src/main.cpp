@@ -5,13 +5,7 @@
 #include "Window.h"
 #include "Shader.h"
 #include "Plane.h"
-#include "Cube.h"
-#include "Sphere.h"
-#include "Cylinder.h"
-#include "Cone.h"
-#include "Shape.h"
-#include "HierachicalModel.h"
-#include "ModelNode.h"
+#include "RobotModel.h"
 
 int main()
 {
@@ -20,17 +14,19 @@ int main()
 	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");
 	primitiveShader->UseProgram();
 
-	Shape *groundPlane = new Plane(8, 8, glm::vec3(0.0f), glm::vec3(1.0f));
-	groundPlane->SetScale(&glm::vec3(8.0f, 0.0f, 4.0f));
+	RobotModel *robot = new RobotModel(primitiveShader);
+	Shape *groundPlane = new Plane(12, 12, glm::vec3(0.0f), glm::vec3(1.0f));
+	groundPlane->SetScale(&glm::vec3(12.0f, 0.0f, 12.0f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, -1.25f, -7.0f));
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.5f, -3.0f, -21.0f));
 	viewMatrix = glm::rotate(viewMatrix, glm::radians(15.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	viewMatrix = glm::rotate(viewMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 	primitiveShader->SetUniformMatrix4fv("view", &viewMatrix);
-
+	robot->Update();
 	while (window->IsWindowClosed())
 	{
 		window->ClearBuffer();
@@ -42,6 +38,8 @@ int main()
 		primitiveShader->SetUniformMatrix4fv("model", &groundPlane->GetModelMatrix());
 		groundPlane->Draw(true);
 
+		robot->Draw();
+
 		window->SwapBuffers();
 		window->PollEvents();
 		window->RefreshRate();
@@ -50,6 +48,7 @@ int main()
 	primitiveShader->TurnOffProgram();
 
 	delete groundPlane;
+	delete robot;
 	delete primitiveShader;
 	delete window;
 	return 0;
