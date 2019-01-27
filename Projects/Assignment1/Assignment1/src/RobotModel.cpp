@@ -5,6 +5,7 @@
 #include "Cylinder.h"
 #include "Sphere.h"
 #include "Shape.h"
+#include "Torus.h"
 #include "RobotModel.h"
 
 #define LEFT_LEG_CHILD_INDEX 0
@@ -15,6 +16,7 @@
 
 #define NUM_ARM_COMPONENTS 4
 #define NUM_LEG_COMPONENTS 5
+#define NUM_HEAD_COMPONENTS 2
 
 RobotModel::RobotModel(Shader *shader)
 {
@@ -23,15 +25,17 @@ RobotModel::RobotModel(Shader *shader)
 	ModelNode *root = new ModelNode(body, glm::vec3(0.0f, 6.25f, 0.0f), glm::vec3(3.0f, 3.25f, 1.75f));
 
 	//Head
-	Shape *head = new Sphere(24, 12, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+	Shape *head = new Sphere(36, 18, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+	Shape *halo = new Torus(24, 24, glm::vec3(0.0f), glm::vec3(1.0f, 0.84f, 0.0f));
 	ModelNode *headNode = new ModelNode(head, glm::vec3(0.0f, 2.6f, 0.0f), glm::vec3(2.0f));
+	ModelNode *haloNode = new ModelNode(halo, glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(3.0f, 2.0f, 3.0f), glm::vec3(1.0f, 0.0f, 0.0f), -20.0f);
 
 	//Right leg
 	Shape *leftLegTopJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *leftLegTopSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
 	Shape *leftLegBottomJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *leftLegBottomSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
-	Shape *leftFoot = new Cone(8, 12, glm::vec3(0.0f), glm::vec3(0.73f, 0.33f, 0.83f));
+	Shape *leftFoot = new Cone(16, 16, glm::vec3(0.0f), glm::vec3(0.73f, 0.33f, 0.83f));
 	ModelNode *leftLegTopJointNode = new ModelNode(leftLegTopJoint, glm::vec3(-1.0f, -2.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
 	ModelNode *leftLegTopSegmentNode = new ModelNode(leftLegTopSegment, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f));
 	ModelNode *leftLegBottomJointNode = new ModelNode(leftLegBottomJoint, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
@@ -43,7 +47,7 @@ RobotModel::RobotModel(Shader *shader)
 	Shape *rightLegTopSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
 	Shape *rightLegBottomJoint = new Sphere(12, 6, glm::vec3(0.0f), glm::vec3(0.93f, 0.46f, 0.0f));
 	Shape *rightLegBottomSegment = new Cylinder(8, 8, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
-	Shape *rightFoot = new Cone(8, 12, glm::vec3(0.0f), glm::vec3(0.73f, 0.33f, 0.83f));
+	Shape *rightFoot = new Cone(16, 16, glm::vec3(0.0f), glm::vec3(0.73f, 0.33f, 0.83f));
 	ModelNode *rightLegTopJointNode = new ModelNode(rightLegTopJoint, glm::vec3(1.0f, -2.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
 	ModelNode *rightLegTopSegmentNode = new ModelNode(rightLegTopSegment, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.5f, 1.50f, 0.5f));
 	ModelNode *rightLegBottomJointNode = new ModelNode(rightLegBottomJoint, glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(.75f, .75f, .75f));
@@ -86,6 +90,7 @@ RobotModel::RobotModel(Shader *shader)
 
 	// Add head
 	root->AddChildNode(headNode);
+	headNode->AddChildNode(haloNode);
 
 	// Add left arm to hierarchy
 	root->AddChildNode(leftArmShoulderJointNode);
@@ -132,7 +137,7 @@ void RobotModel::Update()
 	matrixStack.pop();
 
 	matrixStack.push(transform);
-	UpdateAppendage(HEAD_CHILD_INDEX, 1, body, &transform);
+	UpdateAppendage(HEAD_CHILD_INDEX, NUM_HEAD_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 

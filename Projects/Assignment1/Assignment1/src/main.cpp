@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Shader.h"
 #include "Plane.h"
+#include "Torus.h"
 #include "RobotModel.h"
 
 int main()
@@ -16,6 +17,7 @@ int main()
 
 	RobotModel *robot = new RobotModel(primitiveShader);
 	Shape *groundPlane = new Plane(16, 16, glm::vec3(0.0f), glm::vec3(1.0f));
+
 	groundPlane->SetScale(&glm::vec3(12.0f, 0.0f, 12.0f));
 
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
@@ -48,7 +50,6 @@ int main()
 	primitiveShader->TurnOffProgram();
 
 	delete groundPlane;
-	delete robot;
 	delete primitiveShader;
 	delete window;
 	return 0;

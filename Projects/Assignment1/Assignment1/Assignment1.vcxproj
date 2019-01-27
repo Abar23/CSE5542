@@ -136,6 +136,7 @@
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\Torus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RobotModel.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\Torus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
