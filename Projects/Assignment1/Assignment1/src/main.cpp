@@ -40,7 +40,7 @@ int main()
 		primitiveShader->SetUniformMatrix4fv("model", &groundPlane->GetModelMatrix());
 		groundPlane->Draw(true);
 
-		robot->Draw();
+		robot->Draw(true);
 
 		window->SwapBuffers();
 		window->PollEvents();

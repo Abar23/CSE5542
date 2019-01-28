@@ -21,8 +21,8 @@
 RobotModel::RobotModel(Shader *shader)
 {
 	//Body
-	Shape *body = new Cube(4, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
-	ModelNode *root = new ModelNode(body, glm::vec3(0.0f, 6.25f, 0.0f), glm::vec3(3.0f, 3.25f, 1.75f));
+	Shape *body = new Cube(6, glm::vec3(0.0f), glm::vec3(0.27f, 0.5f, 0.7f));
+	ModelNode *root = new ModelNode(body, glm::vec3(0.0f, 6.50f, 0.0f), glm::vec3(3.0f, 3.25f, 1.75f));
 
 	//Head
 	Shape *head = new Sphere(36, 18, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 1.0f));
@@ -113,9 +113,9 @@ RobotModel::~RobotModel()
 	delete this->hierarchy;
 }
 
-void RobotModel::Draw()
+void RobotModel::Draw(bool wireFrame)
 {
-	this->hierarchy->Draw(true, this->shader);
+	this->hierarchy->Draw(wireFrame, this->shader);
 }
 
 void RobotModel::Update()

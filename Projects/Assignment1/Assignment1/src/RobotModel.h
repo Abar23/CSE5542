@@ -11,7 +11,7 @@ public:
 
 	~RobotModel();
 
-	void Draw();
+	void Draw(bool wireFrame);
 
 	void Update();
 
