@@ -1,4 +1,5 @@
 #ifndef ROBOTMODEL_H
+#define ROBOTMODEL_H
 
 #include "ModelNode.h"
 #include "HierarchicalModel.h"
