@@ -5,30 +5,6 @@
 #include <string>
 #include "Shader.h"
 
-void CheckCompileErrors(unsigned int shader, std::string type)
-{
-	int success;
-	char infoLog[1024];
-	if (type != "PROGRAM")
-	{
-		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
-	else
-	{
-		glGetProgramiv(shader, GL_LINK_STATUS, &success);
-		if (!success)
-		{
-			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
-}
-
 static char* ReadShaderSource(const char *shaderPath)
 {
 	//open file and make it read only
@@ -76,21 +52,21 @@ Shader::Shader(const char *vertexShaderPath, const char *fragmentShaderPath)
 	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShaderID, 1, &vertexShaderCode, NULL);
 	glCompileShader(vertexShaderID);
-	CheckCompileErrors(vertexShaderID, "VERTEX");
+	CheckForShaderCompilationErrors("VERTEX", vertexShaderID);
 
 	//Create and compile fragment shader
 	const char *fragmentShaderCode = ReadShaderSource(fragmentShaderPath);
 	fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShaderID, 1, &fragmentShaderCode, NULL);
 	glCompileShader(fragmentShaderID);
-	CheckCompileErrors(fragmentShaderID, "FRAGMENT");
+	CheckForShaderCompilationErrors("FRAGMENT", fragmentShaderID);
 
 	//Create shader program and link each shader to the program
 	this->programID = glCreateProgram();
 	glAttachShader(programID, vertexShaderID);
 	glAttachShader(programID, fragmentShaderID);
 	glLinkProgram(programID);
-	CheckCompileErrors(vertexShaderID, "PROGRAM");
+	CheckForShaderCompilationErrors("PROGRAM", vertexShaderID);
 
 	// Remove shader source from GPU
 	glDetachShader(programID, vertexShaderID);
@@ -123,4 +99,28 @@ GLuint Shader::GetProgramID()
 void Shader::SetUniformMatrix4fv(const char *uniformName, glm::mat4 *matrix)
 {
 	glUniformMatrix4fv(glGetUniformLocation(this->programID, uniformName), 1, GL_FALSE, (GLfloat *)&matrix[0][0]);
+}
+
+void Shader::CheckForShaderCompilationErrors(std::string type, unsigned int shader)
+{
+	int successStatus;
+	char errorLog[1024];
+	if (type == "PROGRAM")
+	{
+		glGetProgramiv(shader, GL_LINK_STATUS, &successStatus);
+		if (!successStatus)
+		{
+			glGetProgramInfoLog(shader, 1024, NULL, errorLog);
+			std::cout << "Program Linking Error of type: " << type << "\n" << errorLog << std::endl;
+		}
+	}
+	else
+	{
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &successStatus);
+		if (!successStatus)
+		{
+			glGetShaderInfoLog(shader, 1024, NULL, errorLog);
+			std::cout << "Shader Compilation Error of type: " << type << "\n" << errorLog << std::endl;
+		}
+	}
 }

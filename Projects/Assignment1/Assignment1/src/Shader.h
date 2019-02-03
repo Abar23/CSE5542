@@ -24,6 +24,8 @@ public:
 
 private:
 	GLuint programID;
+
+	static void CheckForShaderCompilationErrors(std::string type, unsigned int shader);
 };
 
 #endif //SHADER_H
