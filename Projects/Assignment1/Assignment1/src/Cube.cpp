@@ -5,6 +5,7 @@
 Cube::Cube(unsigned int faceSubdivisions, glm::vec3 position, glm::vec3 color) : 
 	Shape(SetAllFaceVertices(faceSubdivisions, &color), SetAllFaceIndices(faceSubdivisions))
 {
+	// Set model matrix of the cone to the initial position
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
 }
 
@@ -15,9 +16,10 @@ Cube::~Cube()
 std::vector<MeshVertex> Cube::SetAllFaceVertices(unsigned int faceSubdivisions, glm::vec3 *color)
 {
 	std::vector<MeshVertex> vertices;
+	// Calculate the distance between vertices based on the faceSubdivisions
 	float vertexStep = 1.0f / faceSubdivisions;
 
-	// Top face
+	// Create the top face
 	CreateFaceVertices(
 		&vertices,
 		color,
@@ -26,7 +28,7 @@ std::vector<MeshVertex> Cube::SetAllFaceVertices(unsigned int faceSubdivisions, 
 		vertexStep, 0.0f, 0.0f,
 		faceSubdivisions);
 
-	// Bottom face
+	// Create the bottom face
 	CreateFaceVertices(
 		&vertices,
 		color,
@@ -35,7 +37,7 @@ std::vector<MeshVertex> Cube::SetAllFaceVertices(unsigned int faceSubdivisions, 
 		vertexStep, 0.0f, 0.0f,
 		faceSubdivisions);
 
-	// Front face
+	// Create the front face
 	CreateFaceVertices(
 		&vertices,
 		color,
@@ -44,7 +46,7 @@ std::vector<MeshVertex> Cube::SetAllFaceVertices(unsigned int faceSubdivisions, 
 		vertexStep, 0.0f, 0.0f,
 		faceSubdivisions);
 
-	// Back face
+	// Create the back face
 	CreateFaceVertices(
 		&vertices,
 		color,
@@ -53,7 +55,7 @@ std::vector<MeshVertex> Cube::SetAllFaceVertices(unsigned int faceSubdivisions, 
 		vertexStep, 0.0f, 0.0f,
 		faceSubdivisions);
 
-	// Left face
+	// Create the left face
 	CreateFaceVertices(
 		&vertices,
 		color,
@@ -62,7 +64,7 @@ std::vector<MeshVertex> Cube::SetAllFaceVertices(unsigned int faceSubdivisions, 
 		0.0f, 0.0f, vertexStep,
 		faceSubdivisions);
 
-	// Right face
+	// Create the right face
 	CreateFaceVertices(
 		&vertices,
 		color,
@@ -80,8 +82,10 @@ std::vector<unsigned int> Cube::SetAllFaceIndices(unsigned int faceSubdivisions)
 	unsigned int currentIndex = 0;
 
 	unsigned int indexOffset = faceSubdivisions + 1;
+	// Iterate through the number of faces that comprices that cube
 	for (unsigned int i = 0; i < NUM_FACES; i++)
 	{
+		// Generate the indices that for each face of the cube
 		for (unsigned int j = 0; j < faceSubdivisions; j++)
 		{
 			for (unsigned int k = 0; k < faceSubdivisions; k++)
@@ -114,6 +118,7 @@ void Cube::CreateFaceVertices(
 	MeshVertex vertex;
 	vertex.color = *color;
 
+	// Calculate all vertices of the face based upon the initial positoin and the inner/outer directions
 	for (unsigned int i = 0; i <= faceSubdivisions; i++)
 	{
 		for (unsigned int j = 0; j <= faceSubdivisions; j++)

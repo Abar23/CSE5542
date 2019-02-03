@@ -10,12 +10,13 @@ folder that contains images of my code running on my computer. I have created th
 code does not work on another machine, that way it can be seen that the code actually compiles and runs successfully.
 
 Design:
-There are two major classes that deal with abstracting OpenGL code away from the client, those classes are Shader
-and Mesh. The Shader class deals with reading files that contain code for vertex and fragment shaders. Once the files
+There are three major classes that deal with abstracting OpenGL and windowing code away from the client, those classes are Shader,
+Mesh, and Window. The Shader class deals with reading files that contain code for vertex and fragment shaders. Once the files
 have been read into the program, the class then compiles, links, and creates a shader program. Additionally, while
 it is trying to create a shader program, it will perform intermediary error checking. The Mesh class deals with setting
 up vertex buffers, index buffer, and vertex array objects for the corresponding vertex, color, and index data for objects that
 are to be drawn to the screen. It also contains draw calls for proper setting the buffer binding and OpenGL rendering modes.
+The Window class handles intitialization of GLEW and creates a window using GLFW that the OpenGL context is attached to.
 
 Outside of the abstraction classes, there the Cone, Cube, Cylinder, Torus, Plane, and Sphere classes that define all
 vertex, color, and index data needed to render each object. Each class contains their own parameters that define position, 

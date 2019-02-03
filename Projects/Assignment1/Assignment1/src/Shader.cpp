@@ -28,16 +28,14 @@ static char* ReadShaderSource(const char *shaderPath)
 		else
 		{
 			printf("Error ocurred while reading shader file!");
-			cin.get();
-			exit(0);
+			exit(EXIT_FAILURE);
 		}
 		fclose(shaderCode);
 	}
 	else
 	{
 		std::cout << "Shader \"" << shaderPath << "\" does not exist!" << std::endl;
-		cin.get();
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 	return content;
 }
@@ -81,12 +79,12 @@ Shader::~Shader()
 	glDeleteProgram(this->programID);
 }
 
-void Shader::UseProgram()
+void Shader::BindProgram()
 {
 	glUseProgram(this->programID);
 }
 
-void Shader::TurnOffProgram()
+void Shader::UnbindProgram()
 {
 	glUseProgram(0);
 }

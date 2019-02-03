@@ -24,8 +24,6 @@ public:
 
 	float GetAspectRatio();
 
-	void ProcessUserInput(glm::vec3 *camerPosition, glm::vec3 *cameraFront, glm::vec3 *cameraUp);
-
 	void RefreshRate();
 
 private:

@@ -77,31 +77,6 @@ float Window::GetAspectRatio()
 	return (float)width / (float)height;
 }
 
-void Window::ProcessUserInput(glm::vec3 *camerPosition, glm::vec3 *cameraFront, glm::vec3 *cameraUp)
-{
-	float cameraSpeed = 2.5f * this->timeBetweenFrames; // Makes camera movement uniform between differing hardware across user machines
-
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		*camerPosition += cameraSpeed * *cameraFront;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	{
-		*camerPosition -= cameraSpeed * *cameraFront;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-	{
-		*camerPosition -= cameraSpeed * glm::normalize(glm::cross(*cameraFront, *cameraUp));
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	{
-		*camerPosition += cameraSpeed * glm::normalize(glm::cross(*cameraFront, *cameraUp));
-	}
-}
-
 // This corrects how fast openGL runs between hardware so that movement with the camera becomes uniform for all users
 void Window::RefreshRate()
 {
