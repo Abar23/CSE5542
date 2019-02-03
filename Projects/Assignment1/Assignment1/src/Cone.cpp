@@ -34,6 +34,7 @@ std::vector<MeshVertex> Cone::SetVertices(unsigned int stacks, unsigned int sect
 		float heightParameter = 1.0f - (stackStep * i);
 		// Calculate y positon based on the current stack height
 		point.y = heightParameter - 0.5f;
+		// Iterate through each sector
 		for (unsigned int j = 0; j <= sectors; j++)
 		{
 			// Calculate the based upon the current sector step

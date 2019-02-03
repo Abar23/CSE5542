@@ -4,8 +4,9 @@
 #include "Plane.h"
 
 Plane::Plane(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 position, glm::vec3 color) : 
-	Shape(SetVertices(heightSubdivisions, widthSubdivisions, color), SetIndices(heightSubdivisions, widthSubdivisions))
+	Shape(SetVertices(heightSubdivisions, widthSubdivisions, &color), SetIndices(heightSubdivisions, widthSubdivisions))
 {
+	// Set model matrix of the cone to the initial position
 	this->modelMatrix = glm::translate(this->modelMatrix, position);
 }
 
@@ -13,15 +14,17 @@ Plane::~Plane()
 {
 }
 
-std::vector<MeshVertex> Plane::SetVertices(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 color)
+std::vector<MeshVertex> Plane::SetVertices(unsigned int heightSubdivisions, unsigned int widthSubdivisions, glm::vec3 *color)
 {
 	std::vector<MeshVertex> vertices;
 	MeshVertex vertex;
-	vertex.color = color;
+	vertex.color = *color;
 
+	// Determine the steps between the vertices based upon the width and height subdivisions
 	float widthStep = 1.0f / (float)widthSubdivisions;
 	float heightStep = 1.0f / (float)heightSubdivisions;
 
+	// Calculate vertices of the plane
 	for (unsigned int i = 0; i <= heightSubdivisions; i++)
 	{
 		float zPosition = 0.5f - ((float)i * heightStep);
@@ -43,6 +46,7 @@ std::vector<unsigned int> Plane::SetIndices(unsigned int heightSubdivisions, uns
 	unsigned int currentIndex = 0;
 	unsigned int indexOffset = widthSubdivisions + 1;
 
+	// Setup all indices for the plane
 	for (unsigned int i = 0; i < heightSubdivisions; i++, currentIndex++)
 	{
 		for (unsigned int j = 0; j < widthSubdivisions; j++, currentIndex++)

@@ -9,20 +9,23 @@ void setFrameBufferSize(GLFWwindow *window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-Window::Window(int height, int width, const char * title, GLFWmonitor * montior, GLFWwindow * share)
+Window::Window(int height, int width, const char * title)
 {
+	// Initialize glfw
 	if (glfwInit() == NULL)
 	{
 		printf("GLFW could not be initialized!\n");
 		exit(EXIT_FAILURE);
 	}
 
+	// Set OpenGL context to version to 4.0
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	this->window = glfwCreateWindow(width, height, title, montior, share);
+	
+	// Create window
+	this->window = glfwCreateWindow(width, height, title, NULL, NULL);
 	if (this->window == NULL)
 	{
 		printf("GLFW could not be initialized!\n");
@@ -30,16 +33,18 @@ Window::Window(int height, int width, const char * title, GLFWmonitor * montior,
 	}
 	glfwMakeContextCurrent(this->window);
 
+	// Set call back for window size changes
 	glfwSetFramebufferSizeCallback(this->window, setFrameBufferSize);
-
+	// Enable experimental drivers
 	glewExperimental = GL_TRUE;
-	GLenum glew = glewInit();
-	if (GLEW_OK != glew)
+	//Initialize GLEW
+	if (glewInit() != GLEW_OK)
 	{
 		printf("Could not initialize GLEW!!");
 		exit(EXIT_FAILURE);
 	}
 
+	// Enable z buffer depth testing
 	glEnable(GL_DEPTH_TEST);
 }
 

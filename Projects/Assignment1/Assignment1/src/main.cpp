@@ -11,7 +11,7 @@
 int main()
 {
 	// Create window
-	Window *window = new Window(400, 400, "Porject 1 - Primitive Robot", NULL, NULL);
+	Window *window = new Window(400, 400, "Porject 1 - Primitive Robot");
 
 	// Create shader program for rendering the primitives
 	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");

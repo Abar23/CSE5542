@@ -21,7 +21,7 @@ std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int 
 	MeshVertex vertex;
 	vertex.color = *color;
 
-	// Determine step length to move based upon the stacks and sectors
+	// Determine sector and stack step to move based upon the stacks and sectors
 	float stackStep = 1.0f / stacks;
 	float sectorStep = (float)(2 * M_PI) / sectors;
 
@@ -29,6 +29,7 @@ std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int 
 	vertex.position = glm::vec3(0.0f, 0.5f, 0.0f);
 	vertices.push_back(vertex);
 
+	// Set initial sector angle
 	float sectorAngle = 0.0f;
 	// Create point vector that will store the calculate x, y, and z values for each vertice
 	glm::vec3 point = glm::vec3(0.0f);
