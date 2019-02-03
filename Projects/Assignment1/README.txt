@@ -44,7 +44,9 @@ necessary to traverse all components that make up the model hierarchy. The Hiera
 performs tree traversal for drawing the model and deleteing all memory that was allocated for the model.
 
 Finally, the Robot class is a pretty big class that deals with setting up all primitive shapes, hierarchy nodes, and pointers between
-the hierarchy nodes in order to setup the arms, legs, and head of the robot. 
+the hierarchy nodes in order to setup the arms, legs, and head of the robot. Each leg of the robot is comprised of one cone, two spheres,
+and two cylinders. Each arm of the robot is comprised of two spheres and two cylinders. The head is comprised of a cylinder and a torus.
+The body is just a cube.
 
 Extra Credit:
 I am an undergraduate CSE student here at OSU. Professor Chen staetd in class that undergrads will get extra crediti if they
