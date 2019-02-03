@@ -44,7 +44,7 @@ std::vector<MeshVertex> Cone::SetVertices(unsigned int stacks, unsigned int sect
 			point.x = heightRatio * 0.5f * cosf(sectorAngle);
 			point.z = heightRatio * 0.5f * sinf(sectorAngle);
 			vertex.position = point;
-			// Add the calculated point to the set of indices
+			// Add the calculated point to the set of vertices
 			vertices.push_back(vertex);
 		}
 	}

@@ -26,7 +26,7 @@ public:
 
 private:
 	/**
-	 * Calculates all vertices needed for the geometry of the cone base
+	 * Calculates all vertices needed for the geometry of the cone
 	 * upon the number of stacks and sectors
 	 * @param stacks
 	 *		Number of stacks to divide the object
@@ -38,7 +38,7 @@ private:
 	static std::vector<MeshVertex> SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 *color);
 
 	/**
-	 * Calculates all indices needed for the geometry of the cone base
+	 * Calculates all indices needed for the geometry of the cone
 	 * upon the number of stacks and sectors
 	 * @param stacks
 	 *		Number of stacks to divide the object

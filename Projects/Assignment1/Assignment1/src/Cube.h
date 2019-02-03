@@ -45,7 +45,7 @@ private:
 	 * Generates the vertices of a single face based upon the 
 	 * face subdivisions, the starting point of the face, and 
 	 * two vector directions that indicate how the face should
-	 * be constructed.
+	 * be constructed
 	 * @param vertices
 	 *		A pointer to the vector object storing the vertices of the cube
 	 * @param color
