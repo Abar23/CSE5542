@@ -49,24 +49,34 @@ ModelNode::~ModelNode()
 
 glm::mat4 ModelNode::UpdateModelMatrix(glm::mat4 *transformation)
 {
+	// Create translation matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), this->translation);
+	// Create scale matrix
 	glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), this->scale);
-	glm::mat4 rotationMatrix = glm::mat4(1.0f);
 
+	// Set rotation matrix to Identity
+	glm::mat4 rotationMatrix = glm::mat4(1.0f);
+	// If tation matrix is to be applied. create rotation matrix based upon the angle and axis of rotation
 	if (this->nodeShouldRotate)
 	{
 		rotationMatrix = glm::rotate(rotationMatrix, glm::radians(this->angle), this->axisOfRotation);
 	}
 
+	// Createthe nodes transformation that has its translation and rotation matrix applied to the passed in tranform matrix
 	glm::mat4 newTransformationMatrix = *transformation * rotationMatrix * translationMatrix;
+	// Cache the matrix from above since it represents the transformation pertaining to the hierarchy
 	glm::mat4 hierarchyMatrix = newTransformationMatrix;
 
+	// Check it local rotation should be applied
 	if (this->nodeShouldRotateLocally)
 	{
+		// Apply location roation to transform
 		newTransformationMatrix = glm::rotate(newTransformationMatrix, glm::radians(this->localAngle), this->localAxisOfRotation);
 	}
 
+	// Apply scale to node tranformation matrix
 	newTransformationMatrix *= scaleMatrix;
+	// Set model shape model matrix that is stored at the node
 	this->shape->SetModelMatrix(&newTransformationMatrix);
 
 	return hierarchyMatrix;

@@ -8,6 +8,7 @@ HierarchicalModel::HierarchicalModel(ModelNode *rootNode)
 
 HierarchicalModel::~HierarchicalModel()
 {
+	// Use DFS to delete all nodes that comprise the hierachy
 	stack<ModelNode *> nodeStack;
 	nodeStack.push(this->rootNode);
 
@@ -32,12 +33,14 @@ ModelNode * HierarchicalModel::GetRootNode()
 
 void HierarchicalModel::Draw(bool wireFrame, Shader *shader)
 {
+	//Use DFS to draw all nodes in the hierchy
 	stack<ModelNode *> nodeStack;
 	nodeStack.push(this->rootNode);
 
 	while (!nodeStack.empty())
 	{
 		ModelNode *node = nodeStack.top();
+		// Use shader pointer to set the model matrix of the ModelNode to the uniform of the shader
 		shader->SetUniformMatrix4fv("model", &node->GetShape()->GetModelMatrix());
 		node->GetShape()->Draw(wireFrame);
 		nodeStack.pop();
