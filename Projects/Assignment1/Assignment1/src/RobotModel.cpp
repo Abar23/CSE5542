@@ -120,32 +120,42 @@ void RobotModel::Draw(bool wireFrame)
 
 void RobotModel::Update()
 {
-	glm::mat4 transform = glm::mat4(1.0f);
+	// Setup stack to save and restore transformation matrices
 	stack<glm::mat4> matrixStack;
+	// Transformation matrix as Identity
+	glm::mat4 transform = glm::mat4(1.0f);
+	
+	// Get root node of the hierarchical model, which is the body of the robot
 	ModelNode *body = this->hierarchy->GetRootNode();
 
+	// Apply and store transformation of the body
 	transform = body->UpdateModelMatrix(&transform);
 
+	// Update left leg
 	matrixStack.push(transform);
 	UpdateAppendage(LEFT_LEG_CHILD_INDEX, NUM_LEG_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
+	// Update right leg
 	matrixStack.push(transform);
 	UpdateAppendage(RIGHT_LEG_CHILD_INDEX, NUM_LEG_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
+	// Update head
 	matrixStack.push(transform);
 	UpdateAppendage(HEAD_CHILD_INDEX, NUM_HEAD_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
+	// Update left arm
 	matrixStack.push(transform);
 	UpdateAppendage(LEFT_ARM_CHILD_INDEX, NUM_ARM_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
 	matrixStack.pop();
 
+	// Update right arm
 	matrixStack.push(transform);
 	UpdateAppendage(RIGHT_ARM_CHILD_INDEX, NUM_ARM_COMPONENTS, body, &transform);
 	transform = matrixStack.top();
@@ -154,7 +164,9 @@ void RobotModel::Update()
 
 void RobotModel::UpdateAppendage(unsigned int childIndexOfModel, unsigned int numberOfComponents, ModelNode *body, glm::mat4 *transform)
 {
+	// Get ppendage at the passed in position
 	ModelNode *node = body->GetChildAt(childIndexOfModel);
+	// Iterate through all components of the appendage and apply their corresonding transformations
 	for (unsigned int i = 0; i < numberOfComponents; i++)
 	{
 		*transform = node->UpdateModelMatrix(transform);

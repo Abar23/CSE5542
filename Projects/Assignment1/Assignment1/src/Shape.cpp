@@ -4,7 +4,9 @@
 
 Shape::Shape(std::vector<MeshVertex> vertices, std::vector<unsigned int> indices)
 {
+	// Initialize the model matrix to the identity matrix
 	this->modelMatrix = glm::mat4(1.0f);
+	// Create matrix
 	this->mesh = new Mesh(vertices, indices);
 }
 
