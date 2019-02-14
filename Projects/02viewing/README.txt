@@ -31,4 +31,5 @@ operations. These matrices are then passed to uniforms in the shader programs.
 
 
 IMPORTANT NOTE: I created my project in Visual Studios, please let me know if your machine has troubles running the code. I included
-a "Screen Recording" folder that has a video file that shows me running the program from a windows built executable.
+a "Screen Recording" folder that has a video file that shows me running the program from a windows built executable. Added "Release"
+folder that contains a "build" folder that has a runnable windows executable.
