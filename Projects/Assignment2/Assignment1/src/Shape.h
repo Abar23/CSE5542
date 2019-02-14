@@ -46,11 +46,31 @@ public:
 	 */
 	void SetScale(glm::vec3 *scale);
 
+	/**
+	 * Apply global rotation to the shapes model matrix
+	 * @param matrix
+	 *		Pointer that contains rotational matrix to apply to the shape
+	 */
 	void RotateModelMatrixGlobally(glm::mat4 *matrix);
 
+	/**
+	 * Apply tranform matrix to shapes model matrix
+	 * @param matrix
+	 *		Pointer that contains tranform to apply to model matrix
+	 */
 	void UpdateModelMatrix(glm::mat4 *matrix);
 
+	/**
+	 * Returns the global rotational matrix that is being applied to the shapes model matrix
+	 */
 	glm::mat4 GetGlobalRotationMatrix();
+
+	/**
+	 * Set the x and z position of the shape
+	 * @param position
+	 *		Vector that contains the new x and z position for the shape
+	 */
+	void SetPositionXAndZPosition(glm::vec3 position);
 
 protected:
 	Mesh *mesh;

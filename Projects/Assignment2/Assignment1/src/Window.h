@@ -53,11 +53,31 @@ public:
 	*/
 	void RefreshRate();
 
+	/**
+	* Return the current width of the window
+	*/
 	int GetWindowWidth();
 
+	/**
+	* Return the current height of the window
+	*/
 	int GetWindowHeight();
 
+	/**
+	* Return a pointer to the GLFWwindow object
+	*/
 	GLFWwindow * GetGLFWWindow();
+
+	/**
+	 * Process user input from the keyboard
+	 * @param camerPosition
+	 *		Position of the camera
+	 * @param cameraFront
+	 *		The direction the camera is facing
+	 * @param cameraUp
+	 *		The direction that is up relative to the camera
+	 */
+	void ProcessUserInput(glm::vec3 *camerPosition, glm::vec3 *cameraFront, glm::vec3 *cameraUp);
 
 private:
 	GLFWwindow *window;

@@ -1,6 +1,10 @@
 #define GLEW_STATIC
+#define GLM_ENABLE_EXPERIMENTAL
 #include <cstdio>
 #include <cstdlib>
+#include "GLM\glm.hpp"
+#include "GLM\gtx\rotate_vector.hpp"
+#include "GLM\gtx\transform.hpp"
 #include "Window.h"
 
 Window::Window(int height, int width, const char * title)
@@ -101,4 +105,31 @@ int Window::GetWindowHeight()
 GLFWwindow * Window::GetGLFWWindow()
 {
 	return this->window;
+}
+
+void Window::ProcessUserInput(glm::vec3 * camerPosition, glm::vec3 * cameraFront, glm::vec3 * cameraUp)
+{
+	float cameraSpeed = 5.0f * this->timeBetweenFrames; // Makes camera movement uniform between differing hardware across user machines
+
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		*camerPosition += cameraSpeed * *cameraFront;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		*camerPosition -= cameraSpeed * *cameraFront;
+	}
+
+	cameraSpeed = 25.0f * this->timeBetweenFrames;
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		*cameraFront = glm::rotate(*cameraFront, glm::radians(cameraSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		*cameraFront = glm::rotate(*cameraFront, -glm::radians(cameraSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
 }

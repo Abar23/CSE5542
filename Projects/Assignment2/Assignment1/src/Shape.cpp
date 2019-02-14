@@ -58,3 +58,10 @@ glm::mat4 Shape::GetGlobalRotationMatrix()
 {
 	return this->globalRotationMatrix;
 }
+
+void Shape::SetPositionXAndZPosition(glm::vec3 position)
+{
+	glm::mat4 newModelMatrx = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, 0.0f, position.z));
+	
+	this->modelMatrix = newModelMatrx;
+}
