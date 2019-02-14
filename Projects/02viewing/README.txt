@@ -1,61 +1,34 @@
-Assignment 1: Modeling(geometry and transforms)
+Assignment 2: Viewing
 
 Breakdown of Project:
-In the project folder, there are 6 folders that are pertinent to the project. The 'src' folder contains all the
-source code that was created for this project. The "include" folder contains header files for GLM, GLEW, and 
-GLFW, which are the external libraries that I used in the project. The "lib" folder contains all necessary
-.lib files that the Visual Studios compiler needed for external libraries. The "Resources" folder contains the
-fragment and vertex shader code for used for rendering the objects in the scene. Finally, there is a "Screenshots"
-folder that contains images of my code running on my computer. I have created the "Screenshots" folder in case the
-code does not work on another machine, that way it can be seen that the code actually compiles and runs successfully.
+I copied the code from Assignemnt 1 since it contains the code that creates my scene with the robot. In order to create 
+camera movement, I utilized a trackball implementation along with corresponding GLFW window event handling callbacks to
+take care of mouse and keyboard input to the program. The implementation for the trackball can be found in "VirtualTrackBall.cpp"
+and "VirtualTrackBall.h". The callbacks for GLFW that handle mouse inputs are at the top of "main.cpp". Keyboard input
+handling can be found in "Window.cpp". GLFW callbacks are processed when the ProcessUserInput method is called from the window
+object in the main loop that runs the program. To create infinite landscape, I created a plane that clips through the near and
+far planes of the viewing frustum. When he user moves around the world, the plane follows the camera by mirroring the X and Z
+position of the camera. I did not create fog, since implementing fog within OpenGL is much more involved and is only in the 
+scope of the WebGL projects that use an large plane since fog can be created with a simple Three.js call.
 
 Design:
-There are three major classes that deal with abstracting OpenGL and windowing code away from the client, those classes are Shader,
-Mesh, and Window. The Shader class deals with reading files that contain code for vertex and fragment shaders. Once the files
-have been read into the program, the class then compiles, links, and creates a shader program. Additionally, while
-it is trying to create a shader program, it will perform intermediary error checking. The Mesh class deals with setting
-up vertex buffers, index buffer, and vertex array objects for the corresponding vertex, color, and index data for objects that
-are to be drawn to the screen. It also contains draw calls for proper setting the buffer binding and OpenGL rendering modes.
-The Window class handles intitialization of GLEW and creates a window using GLFW that the OpenGL context is attached to.
+"VirtualTrackBall.cpp" and "VirtualTrackBall.h" contain the implementation for the trackball motion that effects the camera. When
+the user clicks the left button of the mouse, they can then drag and rotate the camera around in space. For keyboard input, here
+are all of the possibel user controls:
 
-Outside of the abstraction classes, there the Cone, Cube, Cylinder, Torus, Plane, and Sphere classes that define all
-vertex, color, and index data needed to render each object. Each class contains their own parameters that define position, 
-color, and the desired amount of subdivisions for triangulation. Below is a brief description of the subdivision 
-parameters that each of these classes takes in:
-	1. Sphere class takes in the number of stacks and sectors for its triangulation parameters.
-	2. Plane class takes in a two parameters called heightSubdivisions and widthSubdivisions that defines the
-	dimensions of the triangulation that will be applied to the plane. Essentially, the parameters will create
-	a plane that looks like an mxn grid, where m is heightSubdivisions and n is widthSubdivisions 
-	3. Cube class takes in a single parameter called faceSubdivions that specifies the nxn subdivision that will 
-	be applied to each face. For example, a faceSubdivisions of 4 will create faces that are divided into 4x4 grids 
-	of triangles.
-	4. Cone class takes in the number of stacks and sectors for its triangulation parameters.
-	5. Sphere class takes in the number of stacks and sectors for its triangulation parameters.
-	6. Torus class takes in the number of stacks and sectors for its triangulation parameters.
+	1. A: Rotate the camera towards the left
+	2. D: Rotate the camera towards the right
+	3. W: Move the camera forwards
+	4. S: Move the camera backwards
 
-Each of these shape classes are derived from the Shape base class. In the Shape base class, stores the mesh and model matrix
-for the objects. In addition, it has methods for drawing and manipulating the model matrix. The main reason that this class
-exists is to help reduce the amount of repeated code between the shape derived classes and so that I can take advantage of
-polymorphism so that I can construct hierarchical models out of the object of type Shape.
-
-Once all the primitive shape classes inherited the Shape base class, I implemented the HierachicalModel class which stores
-a root node object of the ModelNode class. The ModelNode class deals with storing translation, rotation, and scaling information
-for the shape primitive that it stores. It also store child pointers to other ModelNode, which creates a basic tree structure
-necessary to traverse all components that make up the model hierarchy. The HierarchicalModel class stores the root ModelNode, and
-performs tree traversal for drawing the model and deleteing all memory that was allocated for the model.
-
-Finally, the Robot class is a pretty big class that deals with setting up all primitive shapes, hierarchy nodes, and pointers between
-the hierarchy nodes in order to setup the arms, legs, and head of the robot. Each leg of the robot is comprised of one cone, two spheres,
-and two cylinders. Each arm of the robot is comprised of two spheres and two cylinders. The head is comprised of a cylinder and a torus.
-The body is just a cube.
+The user will never reach the end of the environment/edge of the plane since the ground plane always follows the camera as it moves.
 
 Extra Credit:
-I am an undergraduate CSE student here at OSU. Professor Chen staetd in class that undergrads will get extra crediti if they
-implement the "Undergraduate Only" portion of the labs. So, all the extra credit that I completed includes triangulation of 
-the primitive objects, creating a hierarchical model for the robot, and implementing a Torus primitive.
-
-IMPORTANT NOTE: I created my project in Visual Studios. I tried to avoid using Windows specific calls in the code,
-however, there is only one Windows define that I had to use so that I could make use of c library I/O. Please let me
-know if your machine has troubles running the code.
+I was told by professor Chen that if we implement a virtual trackball movement system that it would be extra credit. I don't
+know if that is 100% true since it is not stated on the assignment 2 website description. I did, however, create perform all
+of the matrix multiplication that controls the movement of the camera, the prespective projection, and the model matrix
+operations. These matrices are then passed to uniforms in the shader programs.
 
 
+IMPORTANT NOTE: I created my project in Visual Studios, please let me know if your machine has troubles running the code. I included
+a "Screen Recording" folder that has a video file that shows me running the program from a windows built executable.
