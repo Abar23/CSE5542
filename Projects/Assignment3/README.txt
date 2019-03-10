@@ -1,35 +1,89 @@
-Assignment 2: Viewing
+Assignment 3: L-Systems
 
 Breakdown of Project:
-I copied the code from Assignemnt 1 since it contains the code that creates my scene with the robot. In order to create 
-camera movement, I utilized a trackball implementation along with corresponding GLFW window event handling callbacks to
-take care of mouse and keyboard input to the program. The implementation for the trackball can be found in "VirtualTrackBall.cpp"
-and "VirtualTrackBall.h". The callbacks for GLFW that handle mouse inputs are at the top of "main.cpp". Keyboard input
-handling can be found in "Window.cpp". GLFW callbacks are processed when the ProcessUserInput method is called from the window
-object in the main loop that runs the program. To create infinite landscape, I created a plane that clips through the near and
-far planes of the viewing frustum. When he user moves around the world, the plane follows the camera by mirroring the X and Z
-position of the camera. I did not create fog, since implementing fog within OpenGL is much more involved and is only in the 
-scope of the WebGL projects that use an large plane since fog can be created with a simple Three.js call.
+This project utilizes turtle graphics to construct and render l-systems.
+
+Here is the file layout I used to generate l-systems:
+
+<Number of generations>
+<Angle in degrees>
+<Length>
+<Boolean to indicate if random behavior is desired>
+<Initial Sentence/Axiom>
+<Expansion Rules>
+
+To illustrate the above formate, here is "Personal Grammar.txt":
+
+6 <- Number of generations
+22.5 <- Angle in degrees
+30.0 <- Length
+true <- Randomness boolean
+B <- Initial Sentence/Axiom
+B=BB[+XF][-ZY] <- Expansion Rule
+F=BB[+O][-Y] <- Expansion Rule
+Y=BB[+F][-O] <- Expansion Rule
+O=BB[+F][-Y] <- Expansion Rule
+X=+ <- Expansion Rule
+Z=- <- Expansion Rule
+
+In the code there are three main classes that deal with l-system creation, these classes include LSystemLoader, Rule, and TurtleGraphics.
+LSystemLoader class loads in the file that defines the l-system by reading and storing each line of the file. Rule class stores the 
+initial sentence and expansion rules so that it can expand the initial sentence to the desired number of generations. TurtleGraphics class
+has the responsibility of extracting the angle, number of generations, length, and randonmness boolean along with constructing and 
+drawing the l-system itself.
+
+Here are all possible grammars that the TurleGraphics class can handle:
+
+    1. +: Increment current angle of the l-system by the angle in the l-system file definition
+
+    2. -: Decrement current angle of the l-system by the angle in the l-system file definition
+
+    3. [: Save the current state of the turtle
+
+    4. ]: Restore the current state of the turtle
+
+    5. b: Move turtle backwards without creating a cylinder for the movement
+
+    6. X and Z: Do nothing. Usually used for rational/angular control of the l-system
+
+    7. Capital letters (expect X, Y, Z, B, and O): Move turtle forward and create a green cylinder between the original and new 
+       position of the turtle
+
+    8. B:  Move forward and create a brown cylinder between the original and new position of the turtle
+
+    8. Y:  Move forward and create a yellow cylinder between the original and new position of the turtle
+
+    8. O:  Move forward and create a orange cylinder between the original and new position of the turtle
 
 Design:
-"VirtualTrackBall.cpp" and "VirtualTrackBall.h" contain the implementation for the trackball motion that effects the camera. When
-the user clicks the left button of the mouse, they can then drag and rotate the camera around in space. For keyboard input, here
-are all of the possibel user controls:
+The camera is placed far enough away from the l-systems that the user can see the entirety of the l-system as it is being rendered
+to the screen.
 
-	1. A: Rotate the camera towards the left
-	2. D: Rotate the camera towards the right
-	3. W: Move the camera forwards
-	4. S: Move the camera backwards
+Resued the controls from Assignemnt 2. To give a refresher, when the user clicks the left button of the mouse, they can then rotate 
+the camera around in space. For keyboard input, here are all of the possible user controls:
 
-The user will never reach the end of the environment/edge of the plane since the ground plane always follows the camera as it moves.
+    1. A: Rotate the camera towards the left
+    
+    2. D: Rotate the camera towards the right
+    
+    3. W: Move the camera forwards
+    
+    4. S: Move the camera backwards
 
 Extra Credit:
-I was told by professor Chen that if we implement a virtual trackball movement system that it would be extra credit. I don't
-know if that is 100% true since it is not stated on the assignment 2 website description. I did, however, create perform all
-of the matrix multiplication that controls the movement of the camera, the prespective projection, and the model matrix
-operations. These matrices are then passed to uniforms in the shader programs.
+I have created my own interesting grammar, which is called "Personal Grammar.txt". I have added the ability to allow the l-system to
+be stochastic in the sense that the twig length and angle are randomly chosen while the program is creating the l-system. All 
+l-systems use cylinders to render themselves, which means that all l-systems, or flowers as it states on the website, use polygons.
+Finally, I have added grammars that allow for coloring of the l-system. Coloring grammars include B for brown, O for orange, Y for
+yellow, and all other characters that are capitalized are defaulted to green.
 
+Builds:
+I have included 3 builds of the project. Each build runs a unique l-system that displays the various extrea credit and project 
+requirements. "Deterministic Tree Build" contains the build that creates the basic l-system that is defined by "Tree.txt", which is 
+the l-system that is diplayed on the course website. "Random Tree Build" constains the build that creates the l-system defined by 
+"Random Tree.txt", which is the stochastic version of "Tree.txt". Finally, "Personal Grammar.txt" contains the build that creates the
+l-system defined by "Personal Grammar.txt", which is the l-systemt that I created specifically for the extra credit. All executables
+for each build folder are located in the "build" subfolder.
 
 IMPORTANT NOTE: I created my project in Visual Studios, please let me know if your machine has troubles running the code. I included
-a "Screen Recording" folder that has a video file that shows me running the program from a windows built executable. Added "Release"
-folder that contains a "build" folder that has a runnable windows executable.
+a "Screenshots" folder that has a pictures of each l-system generated by the program.
