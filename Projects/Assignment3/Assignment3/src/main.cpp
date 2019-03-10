@@ -42,7 +42,7 @@ void SetCursorPosCallback(GLFWwindow * window, double mouseX, double mouseY)
 int main()
 {
 	// Create window
-	Window *window = new Window(INITIAL_WINDOW_HEIGHT, INITIAL_WINDOW_WIDTH, "Porject 2 - Stereoscopic Viewing");
+	Window *window = new Window(INITIAL_WINDOW_HEIGHT, INITIAL_WINDOW_WIDTH, "Porject 3 - L-Systems");
 
 	// Set callbacks for GLFW event handling
 	glfwSetFramebufferSizeCallback(window->GetGLFWWindow(), SetFrameBufferSize);
@@ -55,7 +55,7 @@ int main()
 	primitiveShader->BindProgram();
 
 	// Load in l-system from file
-	LSystemLoader loader("../Resources/L-Systems/Personal Grammar.txt");
+	LSystemLoader loader("../Resources/L-Systems/Random Tree.txt");
 	// Create a "turtle" that can draw the l-system from the defined file
 	TurtleGraphics turtle(&loader.GetLSystemDefinition());
 	// Create l-system
