@@ -51,9 +51,9 @@ Here are all possible grammars that the TurleGraphics class can handle:
 
     8. B:  Move forward and create a brown cylinder between the original and new position of the turtle
 
-    8. Y:  Move forward and create a yellow cylinder between the original and new position of the turtle
+    9. Y:  Move forward and create a yellow cylinder between the original and new position of the turtle
 
-    8. O:  Move forward and create a orange cylinder between the original and new position of the turtle
+    10. O:  Move forward and create a orange cylinder between the original and new position of the turtle
 
 Design:
 The camera is placed far enough away from the l-systems that the user can see the entirety of the l-system as it is being rendered
