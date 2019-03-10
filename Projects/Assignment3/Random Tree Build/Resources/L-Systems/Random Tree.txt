@@ -1,0 +1,7 @@
+6
+22.5
+20.0
+true
+X
+X=B-[[X]+X]+B[++Fb--Fb+BX]-X
+B=BB

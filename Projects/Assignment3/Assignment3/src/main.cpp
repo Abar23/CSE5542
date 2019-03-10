@@ -55,7 +55,7 @@ int main()
 	primitiveShader->BindProgram();
 
 	// Load in l-system from file
-	LSystemLoader loader("../Resources/L-Systems/Tree.txt");
+	LSystemLoader loader("../Resources/L-Systems/Personal Grammar.txt");
 	// Create a "turtle" that can draw the l-system from the defined file
 	TurtleGraphics turtle(&loader.GetLSystemDefinition());
 	// Create l-system

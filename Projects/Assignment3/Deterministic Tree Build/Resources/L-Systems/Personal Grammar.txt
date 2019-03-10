@@ -1,0 +1,11 @@
+6
+22.5
+30.0
+true
+B
+B=BB[+XF][-ZY]
+F=BB[+O][-Y]
+Y=BB[+F][-O]
+O=BB[+F][-Y]
+X=+
+Z=-
