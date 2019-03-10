@@ -50,12 +50,15 @@ int main()
 	glfwSetCursorPosCallback(window->GetGLFWWindow(), SetCursorPosCallback);
 
 	// Create shader program for rendering the primitives
-	Shader *primitiveShader = new Shader("../Resources/primitives.vs", "../Resources/primitives.fs");
+	Shader *primitiveShader = new Shader("../Resources/Shaders/primitives.vs", "../Resources/Shaders/primitives.fs");
 	// Bind program for the entirety of the application
 	primitiveShader->BindProgram();
 
-	LSystemLoader loader("../Resources/Random Tree.txt");
+	// Load in l-system from file
+	LSystemLoader loader("../Resources/L-Systems/Tree.txt");
+	// Create a "turtle" that can draw the l-system from the defined file
 	TurtleGraphics turtle(&loader.GetLSystemDefinition());
+	// Create l-system
 	turtle.ConstructLSystem();
 
 	// Initialize the view matrx for the camera
@@ -97,6 +100,7 @@ int main()
 		// Set the projectionMatrix to the projection matrix uniform in the primitivesShader
 		primitiveShader->SetUniformMatrix4fv("projection", &projectionMatrix);
 
+		// Draw l-system
 		turtle.Draw(false, primitiveShader);
 
 		// Update the angle of the trackball

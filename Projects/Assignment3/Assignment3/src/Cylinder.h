@@ -24,6 +24,15 @@ public:
 
 	~Cylinder();
 
+	/**
+	 * Place the cylinder between two points
+	 * @param initialPoint
+	 *		Point that the bottom of the cylinder will be set to
+	 * @param endingPoint
+	 *		Point that the top of the cylinder will be set to
+	 * @param angle
+	 *		Angle to rotate about the xy-plane
+	 */
 	void PlaceCylinderBetweenPoints(glm::vec3 initialPoint, glm::vec3 endingPoint, float angle);
 
 private:

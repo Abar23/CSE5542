@@ -18,13 +18,18 @@ Cylinder::~Cylinder()
 
 void Cylinder::PlaceCylinderBetweenPoints(glm::vec3 initialPoint, glm::vec3 endingPoint, float angle)
 {
-	this->modelMatrix = glm::mat4(1.0f);
+	// reset the cylinder model matrix to the identity matrix
+	this->SetModelMatrix(&glm::mat4(1.0f));
 
+	// Find midpoint between the passed in points to translate the cylinder to
 	glm::vec3 midPoint = glm::vec3((initialPoint.x + endingPoint.x) / 2.0f, (initialPoint.y + endingPoint.y) / 2.0f, 0.0f);
+	// Translate the model matrix to the midpoint
 	this->modelMatrix = glm::translate(this->modelMatrix, midPoint);
 	
+	// Rotate the cylinder about the xy-plane, which is the z-axis
 	this->modelMatrix = glm::rotate(this->modelMatrix, glm::radians(-angle), glm::vec3(0.0f, 0.0f, 1.0f));
 	
+	// Use pythagorean to determine how much to strecth the height of the cylinder
 	float yHeight = std::abs(endingPoint.y - initialPoint.y);
 	float xHeight = std::abs(endingPoint.x - initialPoint.x);
 	float yScale = std::sqrtf(std::powf(xHeight, 2) + std::powf(yHeight, 2));
