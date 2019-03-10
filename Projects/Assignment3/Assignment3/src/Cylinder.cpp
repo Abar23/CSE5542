@@ -19,8 +19,6 @@ Cylinder::~Cylinder()
 void Cylinder::PlaceCylinderBetweenPoints(glm::vec3 initialPoint, glm::vec3 endingPoint, float angle)
 {
 	this->modelMatrix = glm::mat4(1.0f);
-	glm::vec3 vectorFormedByPoints = endingPoint - initialPoint;
-	glm::vec3 cylinderUpVector = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	glm::vec3 midPoint = glm::vec3((initialPoint.x + endingPoint.x) / 2.0f, (initialPoint.y + endingPoint.y) / 2.0f, 0.0f);
 	this->modelMatrix = glm::translate(this->modelMatrix, midPoint);
@@ -30,7 +28,7 @@ void Cylinder::PlaceCylinderBetweenPoints(glm::vec3 initialPoint, glm::vec3 endi
 	float yHeight = std::abs(endingPoint.y - initialPoint.y);
 	float xHeight = std::abs(endingPoint.x - initialPoint.x);
 	float yScale = std::sqrtf(std::powf(xHeight, 2) + std::powf(yHeight, 2));
-	this->SetScale(&glm::vec3(1.0f, yScale, 1.0f));
+	this->SetScale(&glm::vec3(0.5f, yScale, 0.5f));
 }
 
 std::vector<MeshVertex> Cylinder::SetVertices(unsigned int stacks, unsigned int sectors, glm::vec3 * color)

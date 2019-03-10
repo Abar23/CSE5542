@@ -21,6 +21,7 @@ private:
 	float length;
 	float angle;
 	int numberOfExpansions;
+	bool isRandom;
 	std::vector<Cylinder *> lSystemComponents;
 	Rule *rule;
 };

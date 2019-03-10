@@ -4,14 +4,11 @@
 #include "GLM\gtx\transform.hpp"
 #include "Window.h"
 #include "Shader.h"
-#include "Plane.h"
-#include "Cube.h"
-#include "Torus.h"
 #include "VirtualTrackBall.h"
 #include "LSystemLoader.h"
 #include "TurtleGraphics.h"
 
-#define INITIAL_WINDOW_WIDTH 1600
+#define INITIAL_WINDOW_WIDTH 1200
 #define INITIAL_WINDOW_HEIGHT 800
 
 static VirtualTrackBall trackball(INITIAL_WINDOW_HEIGHT, INITIAL_WINDOW_WIDTH);
@@ -57,7 +54,7 @@ int main()
 	// Bind program for the entirety of the application
 	primitiveShader->BindProgram();
 
-	LSystemLoader loader("../Resources/Tree 1.txt");
+	LSystemLoader loader("../Resources/Random Tree.txt");
 	TurtleGraphics turtle(&loader.GetLSystemDefinition());
 	turtle.ConstructLSystem();
 
@@ -65,7 +62,7 @@ int main()
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	
 	// Initialize properties of the camera
-	glm::vec3 cameraPosition = glm::vec3(0.0f, 5.0f, 30.0f);
+	glm::vec3 cameraPosition = glm::vec3(0.0f, 30.0f, 75.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -74,8 +71,6 @@ int main()
 
 	// Initialize the perspective projection matrix so that the scene depth
 	glm::mat4 projectionMatrix = glm::mat4(1.0f);
-
-	float intraOcularDistance = 0.5f;
 
 	while (window->IsWindowClosed())
 	{
@@ -98,7 +93,7 @@ int main()
 		primitiveShader->SetUniformMatrix4fv("view", &viewMatrix);
 
 		// Create projection matrix
-		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 100.0f);
+		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 150.0f);
 		// Set the projectionMatrix to the projection matrix uniform in the primitivesShader
 		primitiveShader->SetUniformMatrix4fv("projection", &projectionMatrix);
 

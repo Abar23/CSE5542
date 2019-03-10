@@ -2,10 +2,10 @@
 
 Rule::Rule(std::vector<std::string> *lSystemDefinition) 
 {
-	this->initiator = lSystemDefinition->at(3);
+	this->initiator = lSystemDefinition->at(4);
 	this->sentence = this->initiator;
 
-	for (unsigned int i = 4; i < lSystemDefinition->size(); i++)
+	for (unsigned int i = 5; i < lSystemDefinition->size(); i++)
 	{
 		std::string rule = lSystemDefinition->at(i);
 		this->ruleMap.insert(std::pair<std::string, std::string>(rule.substr(0, 1), rule.substr(2)));
