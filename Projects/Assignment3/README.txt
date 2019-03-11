@@ -16,7 +16,7 @@ To illustrate the above formate, here is "Personal Grammar.txt":
 
 6 <- Number of generations
 22.5 <- Angle in degrees
-30.0 <- Length
+15.0 <- Length
 true <- Randomness boolean
 B <- Initial Sentence/Axiom
 B=BB[+XF][-ZY] <- Expansion Rule

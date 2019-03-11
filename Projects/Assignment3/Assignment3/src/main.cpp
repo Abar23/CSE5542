@@ -65,7 +65,7 @@ int main()
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	
 	// Initialize properties of the camera
-	glm::vec3 cameraPosition = glm::vec3(0.0f, 30.0f, 75.0f);
+	glm::vec3 cameraPosition = glm::vec3(0.0f, 100.0f, 275.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -96,7 +96,7 @@ int main()
 		primitiveShader->SetUniformMatrix4fv("view", &viewMatrix);
 
 		// Create projection matrix
-		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 150.0f);
+		projectionMatrix = glm::perspective(glm::radians(45.0f), window->GetAspectRatio(), 0.1f, 300.0f);
 		// Set the projectionMatrix to the projection matrix uniform in the primitivesShader
 		primitiveShader->SetUniformMatrix4fv("projection", &projectionMatrix);
 

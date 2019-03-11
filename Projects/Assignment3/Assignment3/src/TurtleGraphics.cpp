@@ -35,7 +35,7 @@ TurtleGraphics::TurtleGraphics(std::vector<std::string> *lSystemDefinition)
 		// Expand the sentence of l-system
 		this->rule->Expand();
 		// Reduce the length of the branch/twigs based upon the expansions
-		this->length *= 0.5f;
+		this->length *= 0.7f; // 70% reduction as mentioned on the website
 	}
 
 	// Check if the l-system is stochastic/random
