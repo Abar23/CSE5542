@@ -1,4 +1,5 @@
 Assignment 4: Textures
+
 Breakdown of Project:
 Since there were two parts to this project, one cube rendered with a single texture and another cube rendered with 6 different textures,
 I have demostrated each part in the two cubes that the program renders to the screen. The cube on the left is rendered using one texture
