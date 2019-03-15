@@ -1,35 +1,27 @@
-Assignment 2: Viewing
-
+Assignment 4: Textures
 Breakdown of Project:
-I copied the code from Assignemnt 1 since it contains the code that creates my scene with the robot. In order to create 
-camera movement, I utilized a trackball implementation along with corresponding GLFW window event handling callbacks to
-take care of mouse and keyboard input to the program. The implementation for the trackball can be found in "VirtualTrackBall.cpp"
-and "VirtualTrackBall.h". The callbacks for GLFW that handle mouse inputs are at the top of "main.cpp". Keyboard input
-handling can be found in "Window.cpp". GLFW callbacks are processed when the ProcessUserInput method is called from the window
-object in the main loop that runs the program. To create infinite landscape, I created a plane that clips through the near and
-far planes of the viewing frustum. When he user moves around the world, the plane follows the camera by mirroring the X and Z
-position of the camera. I did not create fog, since implementing fog within OpenGL is much more involved and is only in the 
-scope of the WebGL projects that use an large plane since fog can be created with a simple Three.js call.
+Since there were two parts to this project, one cube rendered with a single texture and another cube rendered with 6 different textures,
+I have demostrated each part in the two cubes that the program renders to the screen. The cube on the left is rendered using one texture
+while the cube on the right is the cube that is rendered with 6 different textures. All textures can be found in the "Resources" folder
+under the "Textures" subfolder. Additionally, all shaders can be found in the "Resources" folder under the "Shaders" subfolder. 
+
+The main class that deals with texture initilaztion/creation is the Texture class. In the class, it loads in the image file, tells OpenGL
+to create a Texture buffer/object, fills the buffer with the image data, generates a mipmap for the texture, and specifies the desire
+texture wrap and filter parameters.
+
+Outside of texture, the Mesh and Cube classes had to be modified to allow for texture mapping and rendering. Specifically, Mesh had all
+references of color stripped from its implementation since the texture coordinates will define the coloring of the geometry and Cube was
+given new draw calls so that it could bind desired textures while drawing all or pieces of its geometry.
 
 Design:
-"VirtualTrackBall.cpp" and "VirtualTrackBall.h" contain the implementation for the trackball motion that effects the camera. When
-the user clicks the left button of the mouse, they can then drag and rotate the camera around in space. For keyboard input, here
-are all of the possibel user controls:
+I kept all keyboard input from prior assignments but removed trackball functionality. For keyboard input, here are all of the 
+possible user controls:
 
 	1. A: Rotate the camera towards the left
 	2. D: Rotate the camera towards the right
 	3. W: Move the camera forwards
 	4. S: Move the camera backwards
 
-The user will never reach the end of the environment/edge of the plane since the ground plane always follows the camera as it moves.
 
-Extra Credit:
-I was told by professor Chen that if we implement a virtual trackball movement system that it would be extra credit. I don't
-know if that is 100% true since it is not stated on the assignment 2 website description. I did, however, create perform all
-of the matrix multiplication that controls the movement of the camera, the prespective projection, and the model matrix
-operations. These matrices are then passed to uniforms in the shader programs.
-
-
-IMPORTANT NOTE: I created my project in Visual Studios, please let me know if your machine has troubles running the code. I included
-a "Screen Recording" folder that has a video file that shows me running the program from a windows built executable. Added "Release"
-folder that contains a "build" folder that has a runnable windows executable.
+IMPORTANT NOTE: I created my project in Visual Studios, please let me know if your machine has troubles running the code. Added 
+"Release" folder that contains a "build" subfolder that has a runnable windows executable.
