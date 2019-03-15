@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <cassert>
 #include "Shader.h"
 
 static char* ReadShaderSource(const char *shaderPath)
@@ -97,6 +98,13 @@ GLuint Shader::GetProgramID()
 void Shader::SetUniformMatrix4fv(const char *uniformName, glm::mat4 *matrix)
 {
 	glUniformMatrix4fv(glGetUniformLocation(this->programID, uniformName), 1, GL_FALSE, (GLfloat *)&matrix[0][0]);
+}
+
+void Shader::SetUniformToTextureUnit(const char *uniformName, uint8_t textureUnit)
+{
+	assert(textureUnit >= 0 && textureUnit <= 31);
+
+	glUniform1i(glGetUniformLocation(this->programID, uniformName), GL_TEXTURE0 + textureUnit);
 }
 
 void Shader::CheckForShaderCompilationErrors(std::string type, unsigned int shader)

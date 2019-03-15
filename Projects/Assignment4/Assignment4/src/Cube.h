@@ -5,6 +5,7 @@
 #include "GLM\glm.hpp"
 #include "Shape.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 #define NUM_FACES 6
 
@@ -17,12 +18,29 @@ public:
 	 *		Triagulates each face into an nxn grid
 	 * @param position
 	 *		The initial position of the object
-	 * @param color
-	 *		The color of the object
 	 */
-	Cube(unsigned int faceSubdivisions, glm::vec3 position, glm::vec3 color);
+	Cube(unsigned int faceSubdivisions, glm::vec3 position);
 	
 	~Cube();
+
+	/**
+	 * Render the cube using the same texture for all faces
+	 * @param texture
+	 *		Pointer to the desired texture to be drawn on the cube
+	 * @param shader
+	 *		Pointer to the active shader
+	 */
+	void DrawCubeWithTexture(Texture *texture, Shader *shader);
+
+
+	/**
+	 * Render the cube using the same texture for all faces
+	 * @param texture
+	 *		Pointer to the desired texture to be drawn on the cube
+	 * @param shader
+	 *		Pointer to the active shader
+	 */
+	void DrawCubeWithTextureArray(std::vector<Texture *> textures, Shader *shader);
 
 private:
 	/**
@@ -32,7 +50,7 @@ private:
 	 * @param color
 	 *		The color of the object
 	 */
-	static std::vector<MeshVertex> SetAllFaceVertices(unsigned int faceSubdivisions, glm::vec3 *color);
+	static std::vector<MeshVertex> SetAllFaceVertices(unsigned int faceSubdivisions);
 
 	/**
 	 * Sets all indices of each face that comprises the cube
@@ -48,8 +66,6 @@ private:
 	 * be constructed
 	 * @param vertices
 	 *		A pointer to the vector object storing the vertices of the cube
-	 * @param color
-	 *		The color of the object
 	 * @param vertices
 	 *		A pointer to the vector object storing the vertices of the cube
 	 * @param x
@@ -75,7 +91,6 @@ private:
 	 */
 	static void CreateFaceVertices(
 		std::vector<MeshVertex> *vertices, 
-		glm::vec3 *color, 
 		float x, float y, float z,
 		float xDirectionOuter, float yDirectionOuter, float zDirectionOuter,
 		float xDirectionInner, float yDirectionInner, float zDirectionInner, 

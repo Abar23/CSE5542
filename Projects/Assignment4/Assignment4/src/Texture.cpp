@@ -5,12 +5,17 @@
 
 Texture::Texture(const char *filePathOfImage)
 {
+	// Tell OpenGL to create a texture buffer/object
 	glGenTextures(1, &this->textureID);
 
+	// Create variables to store information about the image 
 	int width, height, numberOfComponents;
+	// Read in the image with stbi image loader
 	unsigned char *data = stbi_load(filePathOfImage, &width, &height, &numberOfComponents, 0);
+	// Check if the data pointer is not null
 	if (data)
 	{
+		// Determine the image's RGB format from the number of components determined from stbi loader
 		GLenum format;
 		if (numberOfComponents == 1)
 			format = GL_RED;
@@ -21,8 +26,11 @@ Texture::Texture(const char *filePathOfImage)
 		else if (numberOfComponents == 4)
 			format = GL_RGBA;
 
+		// Bind the texture
 		glBindTexture(GL_TEXTURE_2D, this->textureID);
+		// Place the image data into the texture buffer/object
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		// Create mipmap for the texture
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		//Set texture parameters
@@ -36,6 +44,7 @@ Texture::Texture(const char *filePathOfImage)
 	}
 	else
 	{
+		// Indicate to the user that the texture could not be loaded
 		std::cerr << "Failed to load: " << filePathOfImage << std::endl;
 	}
 

@@ -9,7 +9,7 @@
 typedef struct
 {
 	glm::vec3 position;
-	glm::vec3 color;
+	glm::vec2 textureCoords;
 } MeshVertex;
 
 class Mesh
@@ -32,9 +32,24 @@ public:
 	void Draw();
 
 	/**
+	 * Draw portion of the mesh defined by the number of indices and offset into the 
+	 * index buffer
+	 * @param indexCount
+	 *		The number of indices to render
+	 * @param indexBufferOffset
+	 *		The offset into the buffer where the desired indices are located
+	 */
+	void Draw(int indexCount, int indexBufferOffset);
+
+	/**
 	 * Draws the mesh in a wire frame mode
 	 */
 	void DrawWireFrame();
+	
+	/**
+	 * Get the number of indices that define the mesh
+	 */
+	int GetCountOfMeshIndices();
 
 private:
 	GLuint vertexArray, vertexBuffer, indexBuffer;

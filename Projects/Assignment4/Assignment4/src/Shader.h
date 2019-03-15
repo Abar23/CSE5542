@@ -45,6 +45,15 @@ public:
 	 */
 	void SetUniformMatrix4fv(const char *uniformName, glm::mat4 *matrix);
 
+	/**
+	 * Sets texture unit to a uniform sampler2D in the shader program
+	 * @param uniformName
+	 *		Name of the uniform present in the shader program
+	 * @param textureUnit
+	 *		The active texture unit that the texture has modified
+	 */
+	void SetUniformToTextureUnit(const char *uniformName, uint8_t textureUnit);
+
 private:
 	GLuint programID;
 

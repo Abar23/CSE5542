@@ -25,6 +25,15 @@ void Mesh::Draw()
 	glBindVertexArray(0);
 }
 
+void Mesh::Draw(int indexCount, int indexBufferOffset)
+{
+	glBindVertexArray(this->vertexArray);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuffer);
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (void *)indexBufferOffset);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
 void Mesh::DrawWireFrame()
 {
 	// Enable wire fram rendering
@@ -36,6 +45,11 @@ void Mesh::DrawWireFrame()
 	glBindVertexArray(0);
 	// Restore original rendering mode
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+int Mesh::GetCountOfMeshIndices()
+{
+	return this->meshIndices.size();
 }
 
 void Mesh::CreateMesh()
@@ -58,7 +72,7 @@ void Mesh::CreateMesh()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void *)offsetof(MeshVertex, position));
 	// 1 corresponds to the "vertexColor" input of the vertex shader
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void *)offsetof(MeshVertex, color));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void *)offsetof(MeshVertex, textureCoords));
 
 	// Fill index buffer with the passed in indices
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * this->meshIndices.size(), &this->meshIndices[0], GL_STATIC_DRAW);
