@@ -6,7 +6,6 @@
 #include "Shader.h"
 #include "Cube.h"
 #include "Texture.h"
-#include "VirtualTrackBall.h"
 
 #define INITIAL_WINDOW_WIDTH 800
 #define INITIAL_WINDOW_HEIGHT 800
