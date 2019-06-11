@@ -15,7 +15,7 @@ Project Functionalities Checklist:
 	b. Created texture atlases for sprite artwork
 
 4. Increased performance of Boids algorithm
-	a. Desktop or laptop can introduce around 400 to 500 boids into the scene before any slow downs
+	a. Desktop or laptop can introduce around 400 to 500 boids into the scene before slow downs occur
 	b. Varies on mobile devices, however, it should be roughly the same on newer phone models
 
 5. Can use Google Cardboard for VR state of the program.
