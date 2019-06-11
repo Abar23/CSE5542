@@ -21,5 +21,5 @@ Project Functionalities Checklist:
 5. Can use Google Cardboard for VR state of the program.
 
 Technical issues:
-1. Does not work in iPhone due to WebGL 2.0 limitations set on Apple devices.
+1. Does not work on iPhone due to WebGL 2.0 limitations set on Apple devices.
 
