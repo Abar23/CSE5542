@@ -1,7 +1,7 @@
 Assignment 2: Stereoscopic Viewing
 ==================================
 
-![Stereoscopic Viewing Example]("https://raw.githubusercontent.com/Abar23/CSE5542/master/Projects/Assignment2/Screen%20Recording/Assignment%202%20Build%20Execution.mp4")
+![Stereoscopic Viewing Example]("https://github.com/Abar23/CSE5542/blob/master/Projects/Assignment2/Screen%20Recording/Assignment%202%20Build%20Execution.mp4")
 
 Controls
 ========
