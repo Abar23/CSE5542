@@ -1,24 +1,27 @@
-Assignment 1: Modeling(geometry and transforms)
+Assignment 1: Modeling (geometry and transforms)
+===============================================
 
-Breakdown of Project:
+## Breakdown of Project
+
 In the project folder, there are 6 folders that are pertinent to the project. The 'src' folder contains all the
 source code that was created for this project. The "include" folder contains header files for GLM, GLEW, and 
 GLFW, which are the external libraries that I used in the project. The "lib" folder contains all necessary
 .lib files that the Visual Studios compiler needed for external libraries. The "Resources" folder contains the
-fragment and vertex shader code for used for rendering the objects in the scene. Finally, there is a "Screenshots"
+fragment and vertex shader code used for rendering the objects in the scene. Finally, there is a "Screenshots"
 folder that contains images of my code running on my computer. I have created the "Screenshots" folder in case the
 code does not work on another machine, that way it can be seen that the code actually compiles and runs successfully.
 
-Design:
+## Design
+
 There are three major classes that deal with abstracting OpenGL and windowing code away from the client, those classes are Shader,
 Mesh, and Window. The Shader class deals with reading files that contain code for vertex and fragment shaders. Once the files
 have been read into the program, the class then compiles, links, and creates a shader program. Additionally, while
 it is trying to create a shader program, it will perform intermediary error checking. The Mesh class deals with setting
-up vertex buffers, index buffer, and vertex array objects for the corresponding vertex, color, and index data for objects that
-are to be drawn to the screen. It also contains draw calls for proper setting the buffer binding and OpenGL rendering modes.
+up vertex buffers, index buffers, and vertex array objects for the corresponding vertex, color, and index data for objects that
+are to be drawn to the screen. It also contains draw calls for properly setting the buffer binding and OpenGL rendering modes.
 The Window class handles intitialization of GLEW and creates a window using GLFW that the OpenGL context is attached to.
 
-Outside of the abstraction classes, there the Cone, Cube, Cylinder, Torus, Plane, and Sphere classes that define all
+Outside of the abstraction classes, there is the Cone, Cube, Cylinder, Torus, Plane, and Sphere classes that define all
 vertex, color, and index data needed to render each object. Each class contains their own parameters that define position, 
 color, and the desired amount of subdivisions for triangulation. Below is a brief description of the subdivision 
 parameters that each of these classes takes in:
@@ -44,18 +47,7 @@ for the shape primitive that it stores. It also store child pointers to other Mo
 necessary to traverse all components that make up the model hierarchy. The HierarchicalModel class stores the root ModelNode, and
 performs tree traversal for drawing the model and deleteing all memory that was allocated for the model.
 
-Finally, the Robot class is a pretty big class that deals with setting up all primitive shapes, hierarchy nodes, and pointers between
-the hierarchy nodes in order to setup the arms, legs, and head of the robot. Each leg of the robot is comprised of one cone, two spheres,
-and two cylinders. Each arm of the robot is comprised of two spheres and two cylinders. The head is comprised of a cylinder and a torus.
-The body is just a cube.
-
-Extra Credit:
-I am an undergraduate CSE student here at OSU. Professor Chen staetd in class that undergrads will get extra crediti if they
-implement the "Undergraduate Only" portion of the labs. So, all the extra credit that I completed includes triangulation of 
-the primitive objects, creating a hierarchical model for the robot, and implementing a Torus primitive.
-
-IMPORTANT NOTE: I created my project in Visual Studios. I tried to avoid using Windows specific calls in the code,
-however, there is only one Windows define that I had to use so that I could make use of c library I/O. Please let me
-know if your machine has troubles running the code.
-
-
+Finally, the Robot class is a pretty big class that deals with setting up all primitive shapes, hierarchy nodes, and pointers
+between the hierarchy nodes in order to setup the arms, legs, and head of the robot. Each leg of the robot is comprised of one 
+cone, two spheres, and two cylinders. Each arm of the robot is comprised of two spheres and two cylinders. The head is comprised 
+of a cylinder and a torus. The body is just a cube.
