@@ -1,7 +1,7 @@
 Assignment 1: Modeling (geometry and transforms)
 ===============================================
 
-![Primitive Robot](Projects/Assignment1/Screenshots/Robot.PNG)
+![Primitive Robot](https://github.com/Abar23/CSE5542/blob/master/Projects/Assignment1/Screenshots/Robot.PNG)
 
 The goal of this assignment was to generate spheres, cones, toruses, cylinders, and cubes.
 These shapes were then plugged into custom made hierarchical modeling system. Utilizing
