@@ -80,16 +80,16 @@ Windows Builds
 
 In the project, there are 3 different builds that can be run on a windows machine. 
 
-* Deterministic Tree Build: Generates the l-system defined in "Tree.txt". An image of this l-system can be seen below.
+1. Deterministic Tree Build: Generates the l-system defined in "Tree.txt". An image of this l-system can be seen below.
   
 ![Deterministic Tree](https://github.com/Abar23/CSE5542/blob/master/Projects/Assignment3/Screenshots/Tree.PNG)
 
 
-* Personnal Grammar Build: Generates the l-system defined in "Personal Grammar.txt". An image of this l-system can be seen below.
+2. Personnal Grammar Build: Generates the l-system defined in "Personal Grammar.txt". An image of this l-system can be seen below.
 
 ![Personal Grammar](https://github.com/Abar23/CSE5542/blob/master/Projects/Assignment3/Screenshots/Personal%20Grammar.PNG)
 
 
-* Random Tree Build: Generates the l-system defined in "Random Tree.txt". An image of this l-system can be seen below.
+3. Random Tree Build: Generates the l-system defined in "Random Tree.txt". An image of this l-system can be seen below.
 
 ![Random Tree](https://github.com/Abar23/CSE5542/blob/master/Projects/Assignment3/Screenshots/Random%20Tree.PNG)
