@@ -18,9 +18,7 @@ Below is the input file layout used to generate the 3D l-systems:
 .  
 ```
 
-
-The image above is the l-system generated from "Personal Grammar.txt". Below, is the definition of this
-l-system using the previously defined input file layout.
+To illustrate the above formate, here is the definition for "Personal Grammar.txt":
 
 ```
 6 <- Number of generations  
@@ -59,7 +57,7 @@ All possible grammars rules that can be used in an l-system input file:
 
 * O:  Move forward and create a orange cylinder between the original and new position of the turtle
 
-All l-system input files made for this project can found in "Assignment3/Resources/L-Systems" folder.
+**All l-system input files made for this project can found in "Assignment3/Resources/L-Systems" folder.**
 
 Controls
 ========
