@@ -1,4 +1,4 @@
-CSE5542
+CSE 5542
 =======
 
 All projects in this repo were created for Real-Time Rendering coursework that I
